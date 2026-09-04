@@ -1,6 +1,7 @@
 "use client";
 import ServicesHeaderGraphic from "../components/services/ServicesHeaderGraphic";
 import ServiceCardGraphic from "../components/services/ServiceCardGraphic";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 const SERVICES_DATA = [
   {
@@ -75,10 +76,10 @@ export default function Services() {
     <section className="services-section" id="servicos">
       <div className="container services-container">
         
-        {/* HEADER: 08. CONCEITO GERAL */}
+        {/* Header — conceito geral da seção */}
         <div className="services-header-layout">
           <div className="services-header-text">
-            <p className="label services-eyebrow">02. SERVIÇOS</p>
+            <SectionEyebrow index={3} label="Serviços" className="services-eyebrow" />
             <h2 className="services-headline">
               SOLUÇÕES DIGITAIS<br/>
               COMPLETAS PARA<br/>
@@ -99,7 +100,7 @@ export default function Services() {
 
         {/* Categoria Header */}
         <div className="services-section-eyebrow">
-          <p className="label text-accent">09. CATEGORIAS DE SERVIÇOS</p>
+          <p className="label">Categorias · 01—05</p>
         </div>
 
         {/* LAYOUT CARDS LADO-A-LADO */}

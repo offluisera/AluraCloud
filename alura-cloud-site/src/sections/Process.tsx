@@ -1,5 +1,6 @@
 "use client";
 import { process } from "@/data";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /**
  * Process — V2
@@ -13,7 +14,7 @@ export default function Process() {
       <div className="container">
         {/* Section header */}
         <div className="process-header">
-          <p className="label reveal">Como construímos</p>
+          <SectionEyebrow index={4} label="Como construímos" className="reveal" />
           <h2 className="process-title reveal">Processo</h2>
         </div>
 

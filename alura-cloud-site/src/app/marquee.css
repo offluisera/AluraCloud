@@ -1,0 +1,67 @@
+/* Marquee CSS */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-lg) 0;
+  background-color: var(--bg-pri);
+  border-top: 1px solid rgba(23, 135, 109, 0.2);
+  border-bottom: 1px solid rgba(23, 135, 109, 0.2);
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  min-width: max-content;
+  align-items: center;
+}
+
+.marquee-content.interactive:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.marquee-pri {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 500;
+  color: var(--text-pri);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.marquee-accent {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.marquee-separator {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  color: var(--accent);
+  opacity: 0.5;
+  margin: 0 var(--space-xl);
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}

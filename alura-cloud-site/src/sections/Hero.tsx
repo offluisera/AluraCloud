@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Button from "@/components/ui/Button";
 import DigitalCore from "@/components/digital-core/DigitalCore";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /**
  * Hero Section — V2
@@ -60,41 +61,7 @@ export default function Hero() {
 
   return (
     <section id="inicio" ref={sectionRef} className="hero">
-      {/* Background grid pattern */}
-      <div className="hero-grid" aria-hidden="true">
-        <svg
-          width="100%"
-          height="100%"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ position: "absolute", inset: 0 }}
-        >
-          <defs>
-            <pattern
-              id="hero-bg-grid"
-              width="60"
-              height="60"
-              patternUnits="userSpaceOnUse"
-            >
-              <line x1="60" y1="0" x2="60" y2="60" stroke="var(--shape-grid)" strokeWidth="0.3" opacity="0.08" />
-              <line x1="0" y1="60" x2="60" y2="60" stroke="var(--shape-grid)" strokeWidth="0.3" opacity="0.08" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-bg-grid)" />
-        </svg>
 
-        {/* Subtle radial glow for depth */}
-        <div
-          style={{
-            position: "absolute",
-            top: "10%",
-            right: "0%",
-            width: "800px",
-            height: "800px",
-            background: "radial-gradient(circle, rgba(0,223,129,0.015) 0%, transparent 50%)",
-            pointerEvents: "none",
-          }}
-        />
-      </div>
 
       {/* Content */}
       <div className="container hero-inner">
@@ -102,10 +69,7 @@ export default function Hero() {
         <div className="hero-content">
           {/* Eyebrow */}
           <div ref={eyebrowRef} className="hero-eyebrow" style={{ opacity: 0 }}>
-            <span style={{ color: 'var(--accent)', fontWeight: 600, marginRight: '0.25rem', fontSize: '11px', letterSpacing: '0.1em' }}>01.</span>
-            <span className="label" style={{ fontWeight: 600, color: 'var(--text-pri)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Hero
-            </span>
+            <SectionEyebrow index={1} label="Estúdio de Engenharia Digital" />
           </div>
 
           {/* Headline */}

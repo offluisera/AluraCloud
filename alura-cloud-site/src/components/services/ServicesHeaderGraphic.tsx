@@ -8,7 +8,7 @@ const plane = (x: number, y: number, z: number, width: number, height: number) =
 export default function ServicesHeaderGraphic() {
   return (
     <svg 
-      viewBox="0 0 1200 1200" 
+      viewBox="-150 -150 1500 1500" 
       preserveAspectRatio="xMidYMid meet"
       style={{
         width: "100%",

@@ -3,91 +3,12 @@
  * Based on referencia.png design system board
  */
 
-/* ============================================
-   SERVICES — 5 columns (section 06 of reference)
-   ============================================ */
-export interface ServiceItem {
-  id: string;
-  title: string;
-  short: string;
-  description: string;
-  items: string[];
-  available: boolean;
-  comingSoon?: boolean;
-}
-
-export const services: ServiceItem[] = [
-  {
-    id: "01",
-    title: "Websites & Landing Pages",
-    short: "Experiências web com identidade e performance.",
-    description:
-      "Transformamos ideias em experiências digitais que conectam e geram resultados. Websites institucionais, landing pages de alta conversão e interfaces que representam a essência de cada projeto.",
-    items: [
-      "Websites institucionais",
-      "Landing pages",
-      "Interfaces web",
-      "Experiências digitais",
-    ],
-    available: true,
-  },
-  {
-    id: "02",
-    title: "Sistemas e Dashboards",
-    short: "Painéis e sistemas internos sob medida.",
-    description:
-      "Sistemas web completos com dashboards, painéis de controle e interfaces de gestão. Engenharia real para produtos internos que precisam funcionar no dia a dia.",
-    items: [
-      "Dashboards",
-      "Painéis de controle",
-      "Sistemas internos",
-      "Relatórios visuais",
-    ],
-    available: true,
-  },
-  {
-    id: "03",
-    title: "SaaS & Plataformas",
-    short: "Produtos digitais construídos para escalar.",
-    description:
-      "Projetamos e desenvolvemos plataformas SaaS e aplicações web públicas. Da autenticação ao billing, da API ao frontend — engenharia completa para produtos que crescem.",
-    items: [
-      "Plataformas SaaS",
-      "Aplicações web",
-      "APIs e integrações",
-      "Produtos escaláveis",
-    ],
-    available: true,
-  },
-  {
-    id: "04",
-    title: "Soluções Especializadas",
-    short: "Automações, bots e integrações sob medida.",
-    description:
-      "Desenvolvemos soluções digitais especializadas: bots para Discord, servidores Minecraft personalizados, automações e integrações que resolvem problemas específicos.",
-    items: [
-      "Bots para Discord",
-      "Servidores Minecraft",
-      "Automações",
-      "Integrações via API",
-    ],
-    available: true,
-  },
-  {
-    id: "05",
-    title: "Infraestrutura & Deploy",
-    short: "Ambientes, servidores e deploy automatizado.",
-    description:
-      "Configuramos e gerenciamos a infraestrutura técnica dos projetos: ambientes de desenvolvimento e produção, deploy automatizado, servidores Linux e soluções de DevOps.",
-    items: [
-      "Configuração de ambientes",
-      "Deploy e CI/CD",
-      "Servidores Linux",
-      "Docker & containers",
-    ],
-    available: true,
-  },
-];
+/**
+ * Nota: os dados de Serviços vivem em `sections/Services.tsx` (SERVICES_DATA),
+ * já alinhados ao Brief — Serviços (Anexo 3). O array antigo que existia aqui
+ * era de uma categorização anterior e não era mais importado por nenhum
+ * componente — removido para evitar duas fontes de verdade divergentes.
+ */
 
 /* ============================================
    PROCESS — 6 steps (section 13 of reference)

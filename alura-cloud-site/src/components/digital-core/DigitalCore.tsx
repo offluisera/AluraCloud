@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-import BackgroundArcs from "./BackgroundArcs";
-import TechnicalGrid from "./TechnicalGrid";
 import ConnectionPaths from "./ConnectionPaths";
 import Nodes from "./Nodes";
 import CorePlanes from "./CorePlanes";
@@ -60,12 +58,8 @@ export default function DigitalCore() {
           overflow: "visible",
         }}
       >
-        {/* Layer 1: Background (Fundo e Órbitas) */}
-        <BackgroundArcs />
-
-        {/* Layer 2: Midground (Planos, Grid e Conexões) */}
+        {/* Layer 2: Midground (Planos e Conexões) */}
         <CorePlanes />
-        <TechnicalGrid />
         <ConnectionPaths />
         <Nodes />
 

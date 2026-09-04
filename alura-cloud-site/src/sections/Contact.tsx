@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/ui/Button";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /**
  * Contact / CTA — V2
@@ -13,9 +14,12 @@ export default function Contact() {
       <div className="container">
         <div className="contact-inner">
           {/* Label */}
-          <p className="label reveal" style={{ marginBottom: "2rem" }}>
-            Contato
-          </p>
+          <SectionEyebrow
+            index={7}
+            label="Contato"
+            align="center"
+            className="reveal"
+          />
 
           {/* Headline */}
           <h2 className="contact-heading reveal">

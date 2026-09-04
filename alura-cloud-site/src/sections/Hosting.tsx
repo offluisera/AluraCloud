@@ -1,4 +1,5 @@
 "use client";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /**
  * Hosting — V2 (replaces Horizon)
@@ -65,7 +66,7 @@ export default function Hosting() {
 
           {/* Right — Content */}
           <div className="hosting-content">
-            <p className="label reveal">Em breve</p>
+            <SectionEyebrow index={6} label="Hospedagem" className="reveal" />
             <h2 className="hosting-heading reveal">
               Hospedagem
               <br />

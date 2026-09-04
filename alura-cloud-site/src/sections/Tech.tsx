@@ -1,5 +1,6 @@
 "use client";
 import { techIcons } from "@/data";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /**
  * Tech — V2
@@ -14,7 +15,7 @@ export default function Tech() {
         {/* Header */}
         <div className="tech-header">
           <div>
-            <p className="label reveal">Tecnologias</p>
+            <SectionEyebrow index={5} label="Tecnologias" className="reveal" />
             <h2 className="tech-title reveal">Engenharia</h2>
           </div>
           <p className="tech-quote reveal-right">

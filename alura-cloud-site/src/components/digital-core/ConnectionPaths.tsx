@@ -1,8 +1,19 @@
 "use client";
 import { p, lineProps } from "./utils";
 
+interface Connection {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  stroke: string;
+  strokeWidth: number;
+  opacity: number;
+  dasharray?: string;
+}
+
 export default function ConnectionPaths() {
-  const connections = [
+  const connections: Connection[] = [
     // Central glowing core pillar
     { ...lineProps(p(0, 0, 0), p(0, 0, 6)), stroke: "#ffffff", strokeWidth: 1.5, opacity: 0.8 },
     
