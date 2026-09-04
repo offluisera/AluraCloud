@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import GlobalGrid from "./GlobalGrid";
 import BackgroundArcs from "./BackgroundArcs";
 import ConnectionNetwork from "./ConnectionNetwork";
 import DataStreams from "./DataStreams";
@@ -56,8 +55,6 @@ export default function GlobalEnvironment() {
         ref={parallaxRef} 
         style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%" }}
       >
-        <GlobalGrid />
-        
         <svg style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%" }} xmlns="http://www.w3.org/2000/svg">
           {/* Ambient Glow base */}
           <radialGradient id="globalGlow" cx="50%" cy="50%" r="50%">

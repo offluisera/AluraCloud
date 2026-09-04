@@ -1,7 +1,7 @@
 "use client";
 import ServicesHeaderGraphic from "../components/services/ServicesHeaderGraphic";
-import ServiceCardGraphic from "../components/services/ServiceCardGraphic";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import { HoverExpandServices } from "@/components/ui/skiper-ui/skiper52";
 
 const SERVICES_DATA = [
   {
@@ -75,14 +75,14 @@ export default function Services() {
   return (
     <section className="services-section" id="servicos">
       <div className="container services-container">
-        
+
         {/* Header — conceito geral da seção */}
         <div className="services-header-layout">
           <div className="services-header-text">
             <SectionEyebrow index={3} label="Serviços" className="services-eyebrow" />
             <h2 className="services-headline">
-              SOLUÇÕES DIGITAIS<br/>
-              COMPLETAS PARA<br/>
+              SOLUÇÕES DIGITAIS<br />
+              COMPLETAS PARA<br />
               <span className="text-accent">PROJETOS REAIS.</span>
             </h2>
             <p className="services-subtext">
@@ -103,34 +103,9 @@ export default function Services() {
           <p className="label">Categorias · 01—05</p>
         </div>
 
-        {/* LAYOUT CARDS LADO-A-LADO */}
-        <div className="services-cards-grid">
-          {SERVICES_DATA.map((s, i) => (
-            <div key={i} className="service-card">
-              
-              <div className="service-card-header">
-                <div className="service-num">{s.num}</div>
-                <div className="service-card-icon">{s.icon}</div>
-              </div>
-              
-              <h3 className="service-title">{s.title}</h3>
-              {s.standby && <p className="service-standby-badge">EM BREVE</p>}
-              
-              <p className="service-desc">{s.description}</p>
-              
-              <ul className="service-list">
-                {s.items.map((item, idx) => (
-                  <li key={idx} className={s.standby ? "service-standby" : ""}>{item}</li>
-                ))}
-              </ul>
-              
-              {/* The Dedicated 3D Graphic for this specific card */}
-              <div className="service-card-graphic">
-                <ServiceCardGraphic index={i} />
-              </div>
-              
-            </div>
-          ))}
+        {/* LAYOUT CARDS - EXPAND ON HOVER */}
+        <div className="mt-16 w-full">
+          <HoverExpandServices services={SERVICES_DATA} />
         </div>
       </div>
     </section>

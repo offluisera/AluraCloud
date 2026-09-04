@@ -6,7 +6,7 @@ import Manifesto from "@/sections/Manifesto";
 import Services from "@/sections/Services";
 import Process from "@/sections/Process";
 import Tech from "@/sections/Tech";
-import Hosting from "@/sections/Hosting";
+import Portfolio from "@/sections/Portfolio";
 import Contact from "@/sections/Contact";
 
 /**
@@ -17,7 +17,7 @@ import Contact from "@/sections/Contact";
  * 03  SERVIÇOS        → Visual concept 5 columns
  * 04  PROCESSO        → Timeline horizontal 01-06
  * 05  TECNOLOGIAS     → Grid de ícones de tech
- * 06  HOSPEDAGEM      → "Em breve"
+ * 06  PORTFÓLIO       → Horizontal gallery with Plasma bg
  * 07  CTA / CONTATO   → "TEM UMA IDEIA? VAMOS CONSTRUIR."
  * 08  FOOTER          → Marca + links + status
  */
@@ -28,14 +28,16 @@ export default function Home() {
       <GSAPAnimations />
       <main>
         <Hero />
-        <Manifesto />
-        <Services />
-        <Process />
-        <Tech />
-        <Hosting />
-        <Contact />
+        <div style={{ backgroundColor: "var(--bg-deep)", position: "relative", zIndex: 1 }}>
+          <Manifesto />
+          <Services />
+          <Process />
+          <Tech />
+          <Portfolio />
+          <Contact />
+          <Footer />
+        </div>
       </main>
-      <Footer />
     </>
   );
 }

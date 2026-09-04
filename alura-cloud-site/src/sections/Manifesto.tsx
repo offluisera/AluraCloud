@@ -8,11 +8,8 @@ import CurvedLoop from "@/components/ui/CurvedLoop";
  */
 export default function Manifesto() {
   return (
-    <section id="manifesto" className="manifesto-section">
+    <section id="manifesto" className="manifesto-section" style={{ paddingTop: 0 }}>
       <div className="container manifesto-inner" style={{ paddingBottom: 0 }}>
-        <div className="manifesto-eyebrow-container" style={{ position: "relative", marginBottom: "var(--space-xl)", left: "0", top: "0" }}>
-
-        </div>
       </div>
 
       {/* Interactive Marquee replaces the 100vh block */}

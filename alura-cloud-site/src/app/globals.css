@@ -1,11 +1,11 @@
-/* =============================================
-   ALURA CLOUD â€” DESIGN SYSTEM V2
-   EstÃºdio de Engenharia Digital
-   ============================================= */
-
-/* --- Font: Axiforma (DM Sans as fallback until woff2 provided) --- */
-@import "./marquee.css";
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+@import "./marquee.css";
+@import "tailwindcss";
+
+/* =============================================
+   ALURA CLOUD — DESIGN SYSTEM V2
+   Estúdio de Engenharia Digital
+   ============================================= */
 
 /* --- Axiforma @font-face (ready for woff2 files) --- */
 /*
@@ -757,7 +757,7 @@ a {
    ============================================= */
 
 .process {
-  background: var(--bg-raised);
+  background: transparent;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -862,7 +862,7 @@ a {
    ============================================= */
 
 .tech {
-  background: var(--bg-surface);
+  background: transparent;
   border-top: 1px solid var(--border);
 }
 
@@ -968,7 +968,7 @@ a {
    ============================================= */
 
 .hosting {
-  background: var(--bg-deep);
+  background: transparent;
   border-top: 1px solid var(--border);
   overflow: hidden;
 }
@@ -1082,7 +1082,7 @@ a {
    ============================================= */
 
 .contact {
-  background: var(--bg-deep);
+  background: transparent;
   border-top: 1px solid var(--border);
 }
 
@@ -1137,7 +1137,7 @@ a {
    ============================================= */
 
 .footer {
-  background: var(--bg-deep);
+  background: transparent;
   border-top: 1px solid var(--border);
   padding: var(--space-2xl) 0 var(--space-lg);
 }
@@ -1252,7 +1252,7 @@ a {
 
 .manifesto-section {
   position: relative;
-  background: var(--bg-base);
+  background: transparent;
   overflow: hidden;
   padding: var(--space-2xl) 0;
 }
@@ -1335,7 +1335,7 @@ a {
 
 .services-section {
   position: relative;
-  background: var(--bg-deep);
+  background: transparent;
   padding: var(--space-4xl) 0;
 }
 
@@ -1426,26 +1426,88 @@ a {
 
 .services-cards-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
 }
 
 .service-card {
   display: flex;
-  flex-direction: column;
-  background: var(--bg-surface);
-  border: 1px solid rgba(23, 135, 109, 0.1);
-  border-radius: 12px;
-  padding: var(--space-xl) var(--space-lg) 0 var(--space-lg);
+  background: linear-gradient(135deg, rgba(0, 223, 129, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(0, 223, 129, 0.05);
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-  min-height: 500px;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .service-card:hover {
-  border-color: rgba(0, 223, 129, 0.5);
+  border-color: rgba(0, 223, 129, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(0, 223, 129, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
   transform: translateY(-5px);
+}
+
+/* Wide Cards (Span 2) - Horizontal Layout */
+.service-card-wide {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+}
+
+.service-card-wide .service-card-content {
+  flex: 1;
+  padding: var(--space-xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.service-card-wide .service-card-graphic-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: var(--space-xl);
+  height: 100%;
+}
+
+.service-card-wide .service-card-graphic {
+  width: 100%;
+  max-width: 250px;
+  height: 250px;
+  margin: 0;
+}
+
+/* Standard Cards (Span 1) - Vertical Layout */
+.service-card-standard {
+  grid-column: span 1;
+  flex-direction: column;
+}
+
+.service-card-standard .service-card-content {
+  padding: var(--space-xl) var(--space-xl) 0 var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.service-card-standard .service-card-graphic-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.service-card-standard .service-card-graphic {
+  width: calc(100% + (var(--space-xl) * 2));
+  height: 160px;
+  margin-top: var(--space-lg);
+  margin-left: -var(--space-xl);
+  margin-right: -var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .service-card-header {
@@ -1462,9 +1524,11 @@ a {
 
 .service-num {
   font-family: var(--font-display);
-  font-size: var(--text-base);
-  color: var(--text-mute);
-  letter-spacing: 0.05em;
+  font-size: var(--text-2xl);
+  color: rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: -10px;
 }
 
 .service-title {
@@ -1515,8 +1579,14 @@ a {
 }
 
 .service-list li::before {
-  content: 'â€¢';
-  color: var(--accent);
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  margin-top: 0.5rem;
+  flex-shrink: 0;
 }
 
 .service-standby {
@@ -1524,18 +1594,7 @@ a {
   font-style: italic;
 }
 
-.service-card-graphic {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  margin-top: var(--space-xl);
-  margin-left: -var(--space-lg);
-  margin-right: -var(--space-lg);
-  width: calc(100% + (var(--space-lg) * 2));
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
+
 
 /* Removemos todos os estilos antigos de sticky, spacer e blocks do scrollytelling */
 
@@ -1611,3 +1670,9 @@ main > section, .hero, .services, .process, .tech, .hosting, .contact, .manifest
   background: transparent !important;
 }
 
+@media (max-width: 992px) {
+  .services-cards-grid { grid-template-columns: 1fr; }
+  .service-card-wide { grid-column: span 1; flex-direction: column; }
+  .service-card-wide .service-card-content, .service-card-wide .service-card-graphic-wrapper { padding: var(--space-xl); }
+  .service-card-wide .service-card-graphic { height: 160px; max-width: 100%; margin: 0 auto; }
+}

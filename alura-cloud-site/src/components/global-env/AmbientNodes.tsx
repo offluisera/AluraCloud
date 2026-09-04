@@ -14,7 +14,7 @@ export default function AmbientNodes() {
         repeat: -1,
         yoyo: true,
         ease: "steps(1)",
-        repeatDelay: "random(0.5, 4)",
+        repeatDelay: "random(0.5, 4)" as any,
         stagger: {
           each: 0.1,
           from: "random"
@@ -37,34 +37,34 @@ export default function AmbientNodes() {
   }, []);
 
   return (
-    <svg ref={nodesRef} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 4 }} xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <svg ref={nodesRef} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 4 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
       <defs>
         <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feGaussianBlur stdDeviation="4" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
       </defs>
 
       {/* Main Trunk Nodes */}
-      <circle className="ambient-node" cx="20%" cy="55%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
-      <circle className="core-node" cx="20%" cy="85%" r="3" fill="#00DF81" filter="url(#node-glow)" />
-      <circle className="core-node" cx="50%" cy="70%" r="3" fill="#00DF81" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="80%" cy="85%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="380" cy="460" r="4" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="core-node" cx="380" cy="920" r="6" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="core-node" cx="960" cy="630" r="6" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="1530" cy="920" r="4" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
 
       {/* Secondary Nodes */}
-      <circle className="ambient-node" cx="30%" cy="90%" r="1.5" fill="#fff" />
-      <circle className="ambient-node" cx="60%" cy="75%" r="1.5" fill="#fff" />
-      <circle className="ambient-node" cx="70%" cy="60%" r="1.5" fill="#fff" />
-      <circle className="ambient-node" cx="90%" cy="70%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="570" cy="1015" r="3" fill="#fff" />
+      <circle className="ambient-node" cx="1150" cy="725" r="3" fill="#fff" />
+      <circle className="ambient-node" cx="1340" cy="440" r="3" fill="#fff" />
+      <circle className="ambient-node" cx="1720" cy="630" r="3" fill="#fff" />
 
       {/* Upper Web Nodes */}
-      <circle className="ambient-node" cx="15%" cy="27.5%" r="1.5" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
-      <circle className="core-node" cx="40%" cy="40%" r="2.5" fill="#00DF81" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="40%" cy="20%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="60%" cy="10%" r="1.5" fill="#fff" />
-      <circle className="ambient-node" cx="80%" cy="20%" r="1.5" fill="#fff" />
-      <circle className="ambient-node" cx="60%" cy="50%" r="1.5" fill="#fff" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="80%" cy="40%" r="1.5" fill="#fff" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="280" cy="190" r="3" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="core-node" cx="760" cy="430" r="5" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="760" cy="215" r="4" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="1150" cy="20" r="3" fill="#fff" />
+      <circle className="ambient-node" cx="1530" cy="215" r="3" fill="#fff" />
+      <circle className="ambient-node" cx="1150" cy="625" r="3" fill="#fff" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="1530" cy="430" r="3" fill="#fff" filter="url(#node-glow)" />
 
     </svg>
   );
