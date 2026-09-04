@@ -7,17 +7,29 @@ export default function AmbientNodes() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Gentle pulsing effect for the nodes
+      // Tech pulse effect: quick flashes like a processor, not smooth sine waves
       gsap.to(".ambient-node", {
-        opacity: 0.3,
-        duration: "random(2, 4)",
+        opacity: 0.1,
+        duration: 0.1,
+        repeat: -1,
+        yoyo: true,
+        ease: "steps(1)",
+        repeatDelay: "random(0.5, 4)",
+        stagger: {
+          each: 0.1,
+          from: "random"
+        }
+      });
+      
+      // Smooth pulse for larger nodes
+      gsap.to(".core-node", {
+        scale: 1.5,
+        opacity: 0.4,
+        duration: 2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        stagger: {
-          each: 0.5,
-          from: "random"
-        }
+        transformOrigin: "center"
       });
     }, nodesRef);
 
@@ -33,18 +45,27 @@ export default function AmbientNodes() {
         </filter>
       </defs>
 
-      {/* Nodes matching connection path vertices and other ambient locations */}
-      <circle className="ambient-node" cx="5%" cy="95%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="20%" cy="80%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="20%" cy="40%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="40%" cy="20%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="80%" cy="20%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="95%" cy="5%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
+      {/* Main Trunk Nodes */}
+      <circle className="ambient-node" cx="20%" cy="55%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="core-node" cx="20%" cy="85%" r="3" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="core-node" cx="50%" cy="70%" r="3" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="80%" cy="85%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
 
-      <circle className="ambient-node" cx="75%" cy="95%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="75%" cy="65%" r="2" fill="var(--color-mountain-meadow)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="45%" cy="35%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
-      <circle className="ambient-node" cx="10%" cy="35%" r="1.5" fill="var(--text-pri)" filter="url(#node-glow)" />
+      {/* Secondary Nodes */}
+      <circle className="ambient-node" cx="30%" cy="90%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="60%" cy="75%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="70%" cy="60%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="90%" cy="70%" r="1.5" fill="#fff" />
+
+      {/* Upper Web Nodes */}
+      <circle className="ambient-node" cx="15%" cy="27.5%" r="1.5" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="core-node" cx="40%" cy="40%" r="2.5" fill="#00DF81" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="40%" cy="20%" r="2" fill="var(--color-caribbean-green)" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="60%" cy="10%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="80%" cy="20%" r="1.5" fill="#fff" />
+      <circle className="ambient-node" cx="60%" cy="50%" r="1.5" fill="#fff" filter="url(#node-glow)" />
+      <circle className="ambient-node" cx="80%" cy="40%" r="1.5" fill="#fff" filter="url(#node-glow)" />
+
     </svg>
   );
 }
