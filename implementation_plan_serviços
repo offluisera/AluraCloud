@@ -1,0 +1,50 @@
+# Implementação da Seção de Serviços (Editorial & Interativa)
+
+Este plano detalha a reestruturação completa da seção de Serviços para abandonar o formato de cards tradicionais em favor de uma experiência editorial premium, guiada por scroll, alinhada à identidade visual "Engenharia Digital".
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Arquitetura de Scroll (Pinning)**
+> Para criar a sensação de progressão visual atrelada ao scroll, a seção principal "prenderá" (pin) na tela enquanto o usuário rola o mouse. O lado esquerdo exibirá os grupos de serviços trocando suavemente, e o lado direito exibirá módulos SVG dinâmicos representando a engenharia por trás de cada serviço.
+> Por favor, confirme se este comportamento de "congelamento de tela" (sticky/pin) atende à sua visão de "experiência interativa".
+
+## Open Questions
+
+> [!WARNING]
+> **Mobile**
+> Em dispositivos móveis, o efeito de *pinning* pode ser frustrante. A recomendação padrão é desativar o pinning no celular e empilhar o texto e o gráfico visual um abaixo do outro com *fade-in* normal. Você está de acordo com essa abordagem para o responsivo?
+
+## Proposed Changes
+
+A seção será reescrita do zero, substituindo a antiga grade de 5 colunas.
+
+### Componentes de UI e Lógica
+
+#### [MODIFY] `src/sections/Services.tsx`
+- **Remoção**: Deleção da estrutura atual de `<div className="services-grid">`.
+- **Nova Estrutura**:
+  - Container principal com altura alta (ex: `400vh`) para permitir rolagem extensa.
+  - Container interno pegajoso (`sticky` ou `GSAP pin`) ocupando `100vh`.
+  - **Coluna Esquerda (Conteúdo)**: Um painel fixo que cruza dinamicamente os 5 grupos de texto (Desenvolvimento Digital, Produtos e Sistemas, etc.) com a lista de itens. O GSAP controlará a opacidade e posição Y de cada bloco com base na rolagem.
+  - **Coluna Direita (Visualização)**: Um painel que exibe 5 módulos visuais SVG paramétricos baseados em UI/Shapes:
+    1. **Desenvolvimento Digital**: Linhas isométricas formando um wireframe de interface.
+    2. **Produtos e Sistemas**: Visualização de dados, barras horizontais/verticais simulando painéis de controle.
+    3. **Soluções Especializadas**: Nós de automação conectados (grafos) para representar bots e integrações abstratamente (sem logos de jogos para não dominar a estética).
+    4. **Infraestrutura**: Pilha tridimensional de servidores/racks (baseado na engine `ShapeSystem`).
+    5. **Hospedagem**: Um módulo em "standby" (sinal pulsante fraco) com a tag EM BREVE.
+
+#### [MODIFY] `src/app/globals.css`
+- Adição das classes de layout e transição para o ambiente *pinned*:
+  - `.services-pinned-container`
+  - `.services-content-col`
+  - `.services-visual-col`
+- Ajustes de tipografia específicos para esta seção para manter o rigor editorial (espaçamento generoso, listas limpas, tipografia grande no número da seção `01`, `02`).
+
+## Verification Plan
+
+### Manual Verification
+1. Rolar a página a partir do Manifesto até os Serviços.
+2. Garantir que a tela "trave" e o conteúdo mude suavemente (crossfade/slide) em sincronia com o giro do scroll.
+3. Verificar o último item "Hospedagem" e o destravamento natural da seção para rolar até "Processo".
+4. Redimensionar para mobile e garantir que o layout empilhe graciosamente sem travar a rolagem vertical.
