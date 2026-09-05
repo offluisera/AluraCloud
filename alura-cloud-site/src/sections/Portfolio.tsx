@@ -100,24 +100,45 @@ export default function Portfolio() {
           </div>
 
           {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl">
-            {PORTFOLIO_CATEGORIES.map((cat) => (
-              <div key={cat} onClick={() => setActiveCategory(cat)}>
-                <LiquidGlassButton 
-                  label={cat} 
-                  colors={{
-                    fill: activeCategory === cat ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0)",
-                    textColor: activeCategory === cat ? "#ffffff" : "rgba(255,255,255,0.6)",
-                  }}
-                  stroke={{
-                    type: "solid",
-                    color: activeCategory === cat ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.1)",
-                    width: 1
-                  }}
-                  padding="8px 16px"
-                />
-              </div>
-            ))}
+          <div className="flex flex-col items-center gap-3 md:gap-4 max-w-5xl">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+              {PORTFOLIO_CATEGORIES.slice(0, 5).map((cat) => (
+                <div key={cat} onClick={() => setActiveCategory(cat)}>
+                  <LiquidGlassButton 
+                    label={cat} 
+                    colors={{
+                      fill: activeCategory === cat ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0)",
+                      textColor: activeCategory === cat ? "#ffffff" : "rgba(255,255,255,0.6)",
+                    }}
+                    stroke={{
+                      type: "solid",
+                      color: activeCategory === cat ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.1)",
+                      width: 1
+                    }}
+                    padding="8px 16px"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+              {PORTFOLIO_CATEGORIES.slice(5).map((cat) => (
+                <div key={cat} onClick={() => setActiveCategory(cat)}>
+                  <LiquidGlassButton 
+                    label={cat} 
+                    colors={{
+                      fill: activeCategory === cat ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0)",
+                      textColor: activeCategory === cat ? "#ffffff" : "rgba(255,255,255,0.6)",
+                    }}
+                    stroke={{
+                      type: "solid",
+                      color: activeCategory === cat ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.1)",
+                      width: 1
+                    }}
+                    padding="8px 16px"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -166,6 +187,25 @@ export default function Portfolio() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Call to Action Button */}
+        <div className="w-full flex justify-center mt-4 mb-16 relative z-20">
+          <a 
+            href="#contact" 
+            style={{ 
+              backgroundColor: '#ffffff', 
+              color: '#000000', 
+              borderRadius: '9999px',
+              padding: '16px 36px',
+              fontSize: '16px',
+              fontWeight: '600'
+            }}
+            className="inline-flex items-center justify-center gap-3 hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+          >
+            Quero um projeto assim
+            <span aria-hidden="true" style={{ fontSize: '18px' }}>→</span>
+          </a>
         </div>
       </div>
       </div>
