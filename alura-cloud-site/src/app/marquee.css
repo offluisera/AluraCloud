@@ -20,9 +20,17 @@
   align-items: center;
 }
 
+/* Pausa a faixa inteira (as duas lap sets) de uma vez — evita que uma cópia
+   congele enquanto a outra continua deslizando. */
 .marquee-content.interactive:hover {
   animation-play-state: paused;
   cursor: pointer;
+}
+
+.marquee-lap {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
 }
 
 .marquee-pri {
@@ -53,15 +61,44 @@
     transform: translateX(0%);
   }
   to {
-    transform: translateX(-100%);
+    /* Duas lap sets idênticas compõem a faixa; -50% desloca exatamente uma
+       delas, fechando o loop sem costura. */
+    transform: translateX(-50%);
   }
 }
 
 @keyframes marquee-right {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
   to {
     transform: translateX(0%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation: none !important;
+  }
+}
+
+/* =============================================
+   PORTFOLIO MARQUEE
+   Galeria de projetos rolando continuamente da
+   direita para a esquerda (referência: Magnus).
+   Layout (display/gap/padding) e o play-state de
+   hover são aplicados via inline style diretamente
+   em Portfolio.tsx — só a keyframe precisa existir
+   aqui, para não depender do cascade/import do CSS.
+   ============================================= */
+
+@keyframes portfolio-marquee-scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    /* A lista é renderizada duas vezes; -50% desloca exatamente um
+       conjunto completo, criando um loop perfeito e sem costura. */
+    transform: translateX(-50%);
   }
 }

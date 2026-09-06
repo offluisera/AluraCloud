@@ -1,84 +1,341 @@
 "use client";
-import ServicesHeaderGraphic from "../components/services/ServicesHeaderGraphic";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
-import { HoverExpandServices } from "@/components/ui/skiper-ui/skiper52";
 
-const SERVICES_DATA = [
+/* ── SVG Mockups ─────────────────────────────────────────── */
+
+function BrowserChrome({ url, children }: { url: string; children: React.ReactNode }) {
+  return (
+    <div className="svc-browser">
+      <div className="svc-browser-bar">
+        <span className="svc-dot" /><span className="svc-dot" /><span className="svc-dot" />
+        <span className="svc-browser-url">{url}</span>
+      </div>
+      <div className="svc-browser-body">{children}</div>
+    </div>
+  );
+}
+
+/* 01 – Landing page mockup */
+function MockupLanding() {
+  return (
+    <BrowserChrome url="suaempresa.com.br">
+      <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-svg">
+        {/* nav */}
+        <rect x="0" y="0" width="320" height="28" fill="#0d1a14"/>
+        <rect x="12" y="9" width="32" height="10" rx="2" fill="#00df81" opacity=".9"/>
+        <rect x="220" y="9" width="30" height="10" rx="2" fill="#ffffff" opacity=".07"/>
+        <rect x="256" y="9" width="30" height="10" rx="2" fill="#ffffff" opacity=".07"/>
+        <rect x="292" y="9" width="16" height="10" rx="2" fill="#00df81" opacity=".8"/>
+        {/* hero bg */}
+        <rect x="0" y="28" width="320" height="100" fill="#060f0b"/>
+        <circle cx="260" cy="78" r="55" fill="url(#lgrd1)" opacity=".25"/>
+        {/* hero text lines */}
+        <rect x="20" y="46" width="120" height="10" rx="2" fill="#ffffff" opacity=".9"/>
+        <rect x="20" y="62" width="90" height="8" rx="2" fill="#ffffff" opacity=".6"/>
+        <rect x="20" y="78" width="140" height="8" rx="2" fill="#ffffff" opacity=".4"/>
+        <rect x="20" y="96" width="70" height="18" rx="4" fill="#00df81" opacity=".9"/>
+        <rect x="98" y="99" width="50" height="12" rx="4" fill="#ffffff" opacity=".06" stroke="#ffffff" strokeWidth=".5" strokeOpacity=".15"/>
+        {/* floating card */}
+        <rect x="210" y="38" width="90" height="56" rx="8" fill="#0d1a14" stroke="#00df81" strokeWidth=".5" strokeOpacity=".4"/>
+        <rect x="220" y="48" width="50" height="6" rx="2" fill="#00df81" opacity=".7"/>
+        <rect x="220" y="60" width="70" height="4" rx="2" fill="#ffffff" opacity=".25"/>
+        <rect x="220" y="68" width="55" height="4" rx="2" fill="#ffffff" opacity=".15"/>
+        <rect x="220" y="78" width="32" height="10" rx="3" fill="#00df81" opacity=".15" stroke="#00df81" strokeWidth=".5"/>
+        <text x="224" y="86.5" fill="#00df81" fontSize="6" fontFamily="monospace">+12 leads hoje</text>
+        {/* section below */}
+        <rect x="0" y="128" width="320" height="72" fill="#07120e"/>
+        <rect x="20" y="140" width="60" height="6" rx="2" fill="#00df81" opacity=".5"/>
+        <rect x="20" y="152" width="100" height="8" rx="2" fill="#ffffff" opacity=".6"/>
+        <rect x="20" y="166" width="130" height="5" rx="2" fill="#ffffff" opacity=".2"/>
+        <rect x="20" y="175" width="100" height="5" rx="2" fill="#ffffff" opacity=".12"/>
+        {/* cards row */}
+        <rect x="170" y="136" width="64" height="56" rx="6" fill="#0d1a14" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".08"/>
+        <rect x="180" y="144" width="44" height="4" rx="2" fill="#ffffff" opacity=".5"/>
+        <rect x="180" y="152" width="36" height="4" rx="2" fill="#ffffff" opacity=".2"/>
+        <rect x="180" y="162" width="44" height="14" rx="3" fill="#00df81" opacity=".08"/>
+        <rect x="244" y="136" width="64" height="56" rx="6" fill="#0d1a14" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".08"/>
+        <rect x="254" y="144" width="44" height="4" rx="2" fill="#ffffff" opacity=".5"/>
+        <rect x="254" y="152" width="30" height="4" rx="2" fill="#ffffff" opacity=".2"/>
+        <rect x="254" y="162" width="44" height="14" rx="3" fill="#00df81" opacity=".08"/>
+        <defs>
+          <radialGradient id="lgrd1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#00df81" stopOpacity=".6"/>
+            <stop offset="100%" stopColor="#00df81" stopOpacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </BrowserChrome>
+  );
+}
+
+/* 02 – Dashboard SaaS mockup */
+function MockupDashboard() {
+  const pts = "20,80 50,65 80,70 110,48 140,55 170,38 200,42 230,30 260,35";
+  return (
+    <BrowserChrome url="painel.suaempresa.com.br">
+      <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-svg">
+        {/* sidebar */}
+        <rect x="0" y="0" width="56" height="200" fill="#050e09"/>
+        <rect x="8" y="12" width="40" height="8" rx="2" fill="#00df81" opacity=".8"/>
+        {[32,48,64,80,96].map((y,i) => (
+          <rect key={i} x="8" y={y} width={i===0?40:28} height="6" rx="2" fill="#ffffff" opacity={i===0?.5:.15}/>
+        ))}
+        {/* main */}
+        <rect x="56" y="0" width="264" height="200" fill="#060f0b"/>
+        {/* header */}
+        <rect x="64" y="8" width="100" height="7" rx="2" fill="#ffffff" opacity=".6"/>
+        <rect x="244" y="6" width="68" height="12" rx="3" fill="#00df81" opacity=".15" stroke="#00df81" strokeWidth=".5"/>
+        <text x="248" y="14.5" fill="#00df81" fontSize="6" fontFamily="monospace">+ Novo Relatório</text>
+        {/* KPI cards */}
+        {[
+          {x:64,label:"FATURAMENTO",val:"R$ 82,4k",delta:"+12%"},
+          {x:157,label:"CLIENTES",val:"34",delta:"+3"},
+          {x:250,label:"TICKET MÉDIO",val:"R$ 2,4k",delta:"+6%"},
+        ].map((k,i) => (
+          <g key={i}>
+            <rect x={k.x} y="24" width="85" height="44" rx="5" fill="#0a1a10" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".1"/>
+            <text x={k.x+8} y="35" fill="#ffffff" fontSize="5" fontFamily="monospace" opacity=".4">{k.label}</text>
+            <text x={k.x+8} y="50" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold" opacity=".9">{k.val}</text>
+            <text x={k.x+8} y="62" fill="#00df81" fontSize="6" fontFamily="monospace">{k.delta}</text>
+          </g>
+        ))}
+        {/* chart area */}
+        <rect x="64" y="76" width="170" height="84" rx="5" fill="#0a1a10" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".1"/>
+        <text x="72" y="88" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".5">Faturamento mensal</text>
+        {/* chart gridlines */}
+        {[100,116,132,148].map((y,i)=>(
+          <line key={i} x1="72" y1={y} x2="226" y2={y} stroke="#ffffff" strokeWidth=".3" strokeOpacity=".06"/>
+        ))}
+        {/* area fill */}
+        <path d={`M${pts} L260,160 L20,160 Z`} fill="#00df81" fillOpacity=".06" transform="translate(52,70)"/>
+        <polyline points={pts} stroke="#00df81" strokeWidth="1.5" fill="none" transform="translate(52,70)"
+          strokeLinecap="round" strokeLinejoin="round"/>
+        {/* dots */}
+        {pts.split(" ").map((p,i)=>{const[px,py]=p.split(",").map(Number);return(
+          <circle key={i} cx={px+52} cy={py+70} r="2" fill="#00df81"/>
+        )})}
+        {/* table */}
+        <rect x="242" y="76" width="72" height="84" rx="5" fill="#0a1a10" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".1"/>
+        <text x="250" y="88" fill="#ffffff" fontSize="5" fontFamily="monospace" opacity=".4">CLIENTES</text>
+        {[
+          {name:"Studio Bela",status:"Ativo",color:"#00df81"},
+          {name:"Grupo Andrade",status:"Pendente",color:"#f59e0b"},
+          {name:"Nova Tech",status:"Ativo",color:"#00df81"},
+          {name:"Clinica X",status:"Ativo",color:"#00df81"},
+        ].map((c,i)=>(
+          <g key={i}>
+            <text x="250" y={101+i*16} fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".7">{c.name}</text>
+            <rect x="290" y={94+i*16} width="18" height="9" rx="3" fill={c.color} fillOpacity=".15"/>
+            <text x="292" y={100.5+i*16} fill={c.color} fontSize="4.5" fontFamily="monospace">{c.status}</text>
+          </g>
+        ))}
+      </svg>
+    </BrowserChrome>
+  );
+}
+
+/* 03 – Soluções Especializadas: terminal + discord bot */
+function MockupSpecialized() {
+  return (
+    <BrowserChrome url="app.discord.gg / minecraft.server">
+      <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-svg">
+        {/* terminal bg */}
+        <rect x="0" y="0" width="180" height="200" fill="#030b06"/>
+        <rect x="8" y="8" width="70" height="7" rx="2" fill="#00df81" opacity=".6"/>
+        <text x="8" y="24" fill="#00df81" fontSize="6.5" fontFamily="monospace" opacity=".8">$ npm run deploy</text>
+        <text x="8" y="36" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".4">▸ Building project…</text>
+        <text x="8" y="48" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".4">▸ Optimizing assets…</text>
+        <text x="8" y="60" fill="#00df81" fontSize="6" fontFamily="monospace" opacity=".9">✓ Build complete (4.2s)</text>
+        <text x="8" y="72" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".4">▸ Uploading to server…</text>
+        <text x="8" y="84" fill="#00df81" fontSize="6" fontFamily="monospace" opacity=".9">✓ Deployed to prod</text>
+        <text x="8" y="96" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".3">▸ Running health check…</text>
+        <text x="8" y="108" fill="#00df81" fontSize="6" fontFamily="monospace" opacity=".9">✓ All systems online</text>
+        <text x="8" y="120" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".2">$ _</text>
+        {/* progress bar */}
+        <rect x="8" y="135" width="160" height="5" rx="2" fill="#ffffff" opacity=".06"/>
+        <rect x="8" y="135" width="148" height="5" rx="2" fill="#00df81" opacity=".7"/>
+        <text x="8" y="152" fill="#00df81" fontSize="5.5" fontFamily="monospace" opacity=".5">100% · live em produção</text>
+        {/* bot card */}
+        <rect x="188" y="0" width="132" height="200" fill="#060f0b"/>
+        <rect x="196" y="10" width="116" height="90" rx="6" fill="#0d1a14" stroke="#5865f2" strokeWidth=".5" strokeOpacity=".5"/>
+        <rect x="204" y="18" width="32" height="32" rx="16" fill="#5865f2" opacity=".8"/>
+        <text x="214" y="38" fill="#ffffff" fontSize="12" fontFamily="monospace">🤖</text>
+        <text x="244" y="28" fill="#ffffff" fontSize="6" fontFamily="monospace" opacity=".7">AluraBot</text>
+        <text x="244" y="38" fill="#5865f2" fontSize="5" fontFamily="monospace">BOT · Online</text>
+        <rect x="204" y="56" width="96" height="5" rx="2" fill="#ffffff" opacity=".15"/>
+        <text x="204" y="70" fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".5">/ping → Pong! 32ms</text>
+        <text x="204" y="80" fill="#00df81" fontSize="5.5" fontFamily="monospace" opacity=".8">/status → Todos os serviços ok</text>
+        <text x="204" y="90" fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".3">/players → 12/20 online</text>
+        {/* minecraft card */}
+        <rect x="196" y="110" width="116" height="82" rx="6" fill="#0d1a14" stroke="#00df81" strokeWidth=".5" strokeOpacity=".3"/>
+        <text x="206" y="124" fill="#00df81" fontSize="6" fontFamily="monospace" opacity=".7">MINECRAFT SERVER</text>
+        <rect x="206" y="130" width="96" height="4" rx="2" fill="#ffffff" opacity=".06"/>
+        <rect x="206" y="130" width="57" height="4" rx="2" fill="#00df81" opacity=".6"/>
+        <text x="206" y="145" fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".5">12 / 20 jogadores</text>
+        {[
+          {n:"Steve_42",ping:"28ms"},
+          {n:"CrafterX",ping:"41ms"},
+          {n:"NightOwl",ping:"18ms"},
+        ].map((p,i)=>(
+          <g key={i}>
+            <text x="206" y={160+i*12} fill="#ffffff" fontSize="5" fontFamily="monospace" opacity=".5">{p.n}</text>
+            <text x="282" y={160+i*12} fill="#00df81" fontSize="5" fontFamily="monospace" opacity=".7">{p.ping}</text>
+          </g>
+        ))}
+      </svg>
+    </BrowserChrome>
+  );
+}
+
+/* 04 – Infraestrutura: server rack + deploy pipeline */
+function MockupInfra() {
+  return (
+    <BrowserChrome url="infra.suaempresa.com.br">
+      <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-svg">
+        <rect x="0" y="0" width="320" height="200" fill="#060f0b"/>
+        {/* Pipeline header */}
+        <text x="12" y="20" fill="#ffffff" fontSize="7" fontFamily="monospace" opacity=".6">Pipeline de Deploy</text>
+        {/* stages */}
+        {[
+          {x:12,label:"Build",ok:true},
+          {x:88,label:"Test",ok:true},
+          {x:164,label:"Stage",ok:true},
+          {x:240,label:"Prod",ok:true},
+        ].map((s,i)=>(
+          <g key={i}>
+            <rect x={s.x} y="30" width="68" height="36" rx="5" fill={s.ok?"rgba(0,223,129,.07)":"rgba(239,68,68,.07)"} stroke={s.ok?"#00df81":"#ef4444"} strokeWidth=".6" strokeOpacity=".4"/>
+            <text x={s.x+8} y="43" fill={s.ok?"#00df81":"#ef4444"} fontSize="5.5" fontFamily="monospace">{s.ok?"✓":"✗"} {s.label}</text>
+            <text x={s.x+8} y="56" fill="#ffffff" fontSize="5" fontFamily="monospace" opacity=".3">{["4.2s","12s","8s","2s"][i]}</text>
+            {i<3&&<line x1={s.x+68} y1="48" x2={s.x+88} y2="48" stroke="#00df81" strokeWidth=".8" strokeOpacity=".3" strokeDasharray="3,2"/>}
+          </g>
+        ))}
+        {/* Server rack */}
+        <rect x="12" y="80" width="140" height="110" rx="6" fill="#030b06" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".08"/>
+        <text x="20" y="95" fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".4">RACK — Slot A</text>
+        {[
+          {label:"Web 01",cpu:72,status:"ok"},
+          {label:"Web 02",cpu:45,status:"ok"},
+          {label:"DB Primary",cpu:88,status:"warn"},
+          {label:"DB Replica",cpu:31,status:"ok"},
+          {label:"Cache",cpu:15,status:"ok"},
+        ].map((r,i)=>(
+          <g key={i}>
+            <rect x="20" y={102+i*17} width="124" height="12" rx="3" fill="#0a1a10" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".07"/>
+            <circle cx="28" cy={108+i*17} r="3" fill={r.status==="ok"?"#00df81":"#f59e0b"} opacity=".9"/>
+            <text x="35" y={110.5+i*17} fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".6">{r.label}</text>
+            <rect x="100" y={104+i*17} width="36" height="6" rx="2" fill="#ffffff" opacity=".05"/>
+            <rect x="100" y={104+i*17} width={36*r.cpu/100} height="6" rx="2" fill={r.status==="ok"?"#00df81":"#f59e0b"} opacity=".7"/>
+            <text x="139" y={110.5+i*17} fill="#ffffff" fontSize="4.5" fontFamily="monospace" opacity=".4">{r.cpu}%</text>
+          </g>
+        ))}
+        {/* Metrics sidebar */}
+        <rect x="164" y="80" width="144" height="110" rx="6" fill="#030b06" stroke="#ffffff" strokeWidth=".3" strokeOpacity=".08"/>
+        <text x="172" y="95" fill="#ffffff" fontSize="5.5" fontFamily="monospace" opacity=".4">MÉTRICAS — 30d</text>
+        {[
+          {label:"Uptime",val:"99.98%",color:"#00df81"},
+          {label:"Latência",val:"18ms",color:"#00df81"},
+          {label:"Requests",val:"2.4M",color:"#00df81"},
+          {label:"Erros",val:"0.01%",color:"#f59e0b"},
+        ].map((m,i)=>(
+          <g key={i}>
+            <text x="172" y={108+i*22} fill="#ffffff" fontSize="5" fontFamily="monospace" opacity=".35">{m.label}</text>
+            <text x="172" y={120+i*22} fill={m.color} fontSize="9" fontFamily="monospace" fontWeight="bold" opacity=".9">{m.val}</text>
+          </g>
+        ))}
+      </svg>
+    </BrowserChrome>
+  );
+}
+
+/* ── Service data ─────────────────────────────────────────── */
+const SERVICES = [
   {
     num: "01",
-    title: "DESENVOLVIMENTO DIGITAL",
-    description: "Sites, landing pages e interfaces que transformam ideias em experiências digitais.",
-    items: ["Websites", "Landing Pages", "Interfaces Web", "Experiências Digitais"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-        <line x1="3" y1="9" x2="21" y2="9"></line>
-        <line x1="9" y1="21" x2="9" y2="9"></line>
-      </svg>
-    )
+    tag: "Presença Digital",
+    title: "Sites que fazem o visitante virar contato.",
+    description: "Criamos landing pages e sites institucionais focados em conversão — do primeiro clique ao primeiro contato com o seu negócio.",
+    chips: ["Landing Pages", "Websites", "Interfaces Web", "Identidade Digital"],
+    mockup: <MockupLanding />,
+    reverse: false,
   },
   {
     num: "02",
-    title: "PRODUTOS E SISTEMAS",
-    description: "Sistemas, dashboards e plataformas personalizadas para impulsionar seu negócio.",
-    items: ["Sistemas Web", "Dashboards", "SaaS", "Plataformas", "Aplicações Personalizadas"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-      </svg>
-    )
+    tag: "Operação Inteligente",
+    title: "Sistemas que organizam o que hoje roda solto.",
+    description: "Dashboards, CRMs e plataformas sob medida que substituem planilhas e mensagens dispersas por um painel único e em tempo real.",
+    chips: ["Dashboards", "SaaS", "CRM", "Automações", "Integrações"],
+    mockup: <MockupDashboard />,
+    reverse: true,
   },
   {
     num: "03",
-    title: "SOLUÇÕES ESPECIALIZADAS",
-    description: "Soluções específicas para necessidades únicas e integrações avançadas.",
-    items: ["Servidores Minecraft", "Bots para Discord", "Automações", "Integrações", "Projetos Especializados"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19.439 7.85c-.049.322-.059.648-.089.972-.2 2.115-.436 4.228-.68 6.338-.073.633-.16 1.263-.263 1.888-.13.785-.503 1.455-1.071 1.986-.884.825-2.02 1.157-3.197 1.341-1.895.295-3.805.424-5.717.487-1.196.04-2.394.02-3.59-.028-1.009-.04-1.921-.358-2.673-1.054-.741-.685-1.135-1.547-1.29-2.528-.158-1-.237-2.013-.332-3.023-.178-1.89-.317-3.784-.455-5.677-.075-1.03-.122-2.062-.164-3.093-.016-.412.05-.79.3-1.121.284-.377.67-.589 1.127-.665 1.543-.255 3.1-.383 4.662-.48 2.088-.13 4.18-.18 6.27-.15 1.637.024 3.272.102 4.903.259.98.094 1.801.488 2.378 1.295.127.178.225.378.303.585z"></path>
-        {/* Simplified puzzle icon representation */}
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
-    )
+    tag: "Tecnologia Especializada",
+    title: "Soluções para o que ninguém mais resolve.",
+    description: "Bots, servidores de jogos, automações e integrações avançadas — projetos fora do comum que exigem conhecimento técnico real.",
+    chips: ["Bots Discord", "Servidores Minecraft", "Automações", "Integrações"],
+    mockup: <MockupSpecialized />,
+    reverse: false,
   },
   {
     num: "04",
-    title: "INFRAESTRUTURA",
-    description: "Infraestrutura sólida, deploys confiáveis e ambientes robustos para seu projeto.",
-    items: ["Deploy", "Servidores", "Linux", "Ambientes", "Infraestrutura Digital"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-        <line x1="6" y1="6" x2="6.01" y2="6"></line>
-        <line x1="6" y1="18" x2="6.01" y2="18"></line>
-      </svg>
-    )
-  },
-  {
-    num: "05",
-    title: "HOSPEDAGEM",
-    description: "Estamos construindo nossa própria infraestrutura de hospedagem para entregar ainda mais.",
-    items: ["EM BREVE"],
-    standby: true,
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-      </svg>
-    )
+    tag: "Infraestrutura",
+    title: "Deploy confiável, ambiente robusto.",
+    description: "Configuramos e gerenciamos a infraestrutura do seu projeto — servidores Linux, pipelines CI/CD e ambientes de alta disponibilidade.",
+    chips: ["Linux", "Deploy", "CI/CD", "Alta Disponibilidade"],
+    mockup: <MockupInfra />,
+    reverse: true,
   },
 ];
 
+/* ── Component ───────────────────────────────────────────── */
 export default function Services() {
   return (
     <section className="services-section" id="servicos">
-      <div className="container services-container">
 
-        {/* Header — conceito geral da seção */}
-        <div className="services-header-layout">
-          <div className="services-header-text">
+      {/* SVG diagonal circuit lines layer */}
+      <svg className="svc-bg-svg" aria-hidden viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="svc-glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+
+        {/* Path 1 — top-left diagonal sweep */}
+        <path id="sp1" d="M-40,80 C200,90 400,200 720,220 C1040,240 1280,160 1480,180" fill="none" stroke="rgba(0,223,129,0.15)" strokeWidth="1" strokeDasharray="6,10"/>
+        <circle r="5" fill="#00df81" filter="url(#svc-glow)" opacity="0.9">
+          <animateMotion dur="9s" repeatCount="indefinite" begin="0s"><mpath href="#sp1"/></animateMotion>
+        </circle>
+
+        {/* Path 2 — mid descending */}
+        <path id="sp2" d="M1480,280 C1200,320 900,380 600,360 C300,340 100,420 -40,460" fill="none" stroke="rgba(0,223,129,0.12)" strokeWidth="1" strokeDasharray="4,14"/>
+        <circle r="4" fill="#00df81" filter="url(#svc-glow)" opacity="0.8">
+          <animateMotion dur="12s" repeatCount="indefinite" begin="1.5s"><mpath href="#sp2"/></animateMotion>
+        </circle>
+
+        {/* Path 3 — steep diagonal top-right */}
+        <path id="sp3" d="M-40,340 C300,300 600,450 900,420 C1100,400 1300,320 1480,350" fill="none" stroke="rgba(0,223,129,0.1)" strokeWidth="1" strokeDasharray="8,12"/>
+        <circle r="4.5" fill="#00df81" filter="url(#svc-glow)" opacity="0.85">
+          <animateMotion dur="10s" repeatCount="indefinite" begin="3s"><mpath href="#sp3"/></animateMotion>
+        </circle>
+
+        {/* Path 4 — lower wide arc */}
+        <path id="sp4" d="M1480,540 C1100,500 800,600 500,580 C200,560 0,640 -40,660" fill="none" stroke="rgba(0,223,129,0.13)" strokeWidth="1" strokeDasharray="5,10"/>
+        <circle r="4" fill="#00df81" filter="url(#svc-glow)" opacity="0.7">
+          <animateMotion dur="14s" repeatCount="indefinite" begin="5s"><mpath href="#sp4"/></animateMotion>
+        </circle>
+
+        {/* Path 5 — bottom gentle rise */}
+        <path id="sp5" d="M-40,760 C300,720 700,800 1100,760 C1280,745 1400,780 1480,770" fill="none" stroke="rgba(0,223,129,0.1)" strokeWidth="1" strokeDasharray="3,12"/>
+        <circle r="3.5" fill="#00df81" filter="url(#svc-glow)" opacity="0.75">
+          <animateMotion dur="11s" repeatCount="indefinite" begin="2s"><mpath href="#sp5"/></animateMotion>
+        </circle>
+      </svg>
+
+      {/* Intro — 2 col: copy left, node SVG right */}
+      <div className="services-container">
+        <div className="services-intro-grid">
+          <div className="services-intro">
             <SectionEyebrow index={3} label="Serviços" className="services-eyebrow" />
             <h2 className="services-headline">
               SOLUÇÕES DIGITAIS<br />
@@ -88,26 +345,91 @@ export default function Services() {
             <p className="services-subtext">
               Da criação à infraestrutura, entregamos tudo o que seu projeto precisa para existir, crescer e evoluir.
             </p>
-            <button className="services-explore-btn">
-              <span className="btn-node"></span>
-              EXPLORAR SERVIÇOS
-            </button>
           </div>
-          <div className="services-header-visual">
-            <ServicesHeaderGraphic />
+
+          {/* Decorative network SVG */}
+          <div className="services-intro-visual" aria-hidden>
+            <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-network-svg">
+              <defs>
+                <filter id="ng"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+                <radialGradient id="ngrd" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#00df81" stopOpacity="0.18"/>
+                  <stop offset="100%" stopColor="#00df81" stopOpacity="0"/>
+                </radialGradient>
+              </defs>
+              <ellipse cx="210" cy="160" rx="180" ry="140" fill="url(#ngrd)"/>
+              {[40,80,120,160,200,240,280,320,360,400].map(x => (
+                <line key={x} x1={x} y1="0" x2={x} y2="320" stroke="rgba(0,223,129,0.04)" strokeWidth="1"/>
+              ))}
+              {[40,80,120,160,200,240,280].map(y => (
+                <line key={y} x1="0" y1={y} x2="420" y2={y} stroke="rgba(0,223,129,0.04)" strokeWidth="1"/>
+              ))}
+              {[
+                [60,60,210,120],[60,60,160,200],[210,120,370,80],[210,120,300,220],
+                [160,200,300,220],[160,200,80,270],[300,220,380,280],[80,270,200,290],
+                [370,80,380,160],[380,160,380,280]
+              ].map(([x1,y1,x2,y2],i) => (
+                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(0,223,129,0.2)" strokeWidth="1" strokeDasharray="4,6"/>
+              ))}
+              {[
+                {cx:60, cy:60, r:6, p:"4s"},
+                {cx:210,cy:120,r:10,p:"3s"},
+                {cx:370,cy:80, r:5, p:"5s"},
+                {cx:160,cy:200,r:7, p:"6s"},
+                {cx:300,cy:220,r:6, p:"4.5s"},
+                {cx:380,cy:160,r:4, p:"7s"},
+                {cx:80, cy:270,r:5, p:"5.5s"},
+                {cx:200,cy:290,r:4, p:"3.5s"},
+                {cx:380,cy:280,r:6, p:"4s"},
+              ].map((n,i) => (
+                <g key={i}>
+                  <circle cx={n.cx} cy={n.cy} r={n.r+6} fill="#00df81" opacity="0" filter="url(#ng)">
+                    <animate attributeName="opacity" values="0;0.25;0" dur={n.p} repeatCount="indefinite" begin={`${i*0.7}s`}/>
+                    <animate attributeName="r" values={`${n.r+4};${n.r+10};${n.r+4}`} dur={n.p} repeatCount="indefinite" begin={`${i*0.7}s`}/>
+                  </circle>
+                  <circle cx={n.cx} cy={n.cy} r={n.r} fill="#00df81" filter="url(#ng)" opacity="0.8"/>
+                  <circle cx={n.cx} cy={n.cy} r={n.r*0.45} fill="#ffffff" opacity="0.9"/>
+                </g>
+              ))}
+              <path id="npath" d="M60,60 C130,90 180,100 210,120 C250,145 320,150 370,80" fill="none"/>
+              <circle r="3.5" fill="#ffffff" opacity="0.9" filter="url(#ng)">
+                <animateMotion dur="4s" repeatCount="indefinite" begin="0s"><mpath href="#npath"/></animateMotion>
+              </circle>
+            </svg>
           </div>
-        </div>
-
-        {/* Categoria Header */}
-        <div className="services-section-eyebrow">
-          <p className="label">Categorias · 01—05</p>
-        </div>
-
-        {/* LAYOUT CARDS - EXPAND ON HOVER */}
-        <div className="mt-16 w-full">
-          <HoverExpandServices services={SERVICES_DATA} />
         </div>
       </div>
+
+      {/* Full-screen panels — one per service */}
+      {SERVICES.map((s) => (
+        <div key={s.num} className={`svc-panel${s.reverse ? " svc-panel--reverse" : ""}`}>
+          <div className="svc-panel-inner services-container">
+            <div className="svc-mockup-col">{s.mockup}</div>
+            <div className="svc-text-col">
+              <span className="svc-tag">{s.tag}</span>
+              <h3 className="svc-title">{s.title}</h3>
+              <p className="svc-desc">{s.description}</p>
+              <div className="svc-chips">
+                {s.chips.map((c) => (
+                  <span key={c} className="svc-chip">{c}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="svc-panel-divider" />
+        </div>
+      ))}
+
+      {/* 05 – Hospedagem standby */}
+      <div className="svc-panel svc-panel--standby">
+        <div className="svc-panel-inner services-container svc-panel-inner--center">
+          <span className="svc-tag">Hospedagem</span>
+          <h3 className="svc-title">Nossa própria infraestrutura. Em breve.</h3>
+          <p className="svc-desc">Estamos construindo uma plataforma de hospedagem proprietária para entregar mais performance, controle e custo-benefício.</p>
+          <span className="svc-chip svc-chip--soon">Em Breve</span>
+        </div>
+      </div>
+
     </section>
   );
 }
