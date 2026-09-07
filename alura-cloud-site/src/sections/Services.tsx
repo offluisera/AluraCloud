@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { createTimeline, stagger, onScroll, createScope, splitText, type Scope } from "animejs";
+import TiltCard from "@/components/ui/TiltCard";
 
 /* ── SVG Mockups ─────────────────────────────────────────── */
 
@@ -263,6 +264,7 @@ const SERVICES = [
     ),
     description: "Criamos landing pages e sites institucionais focados em conversão — do primeiro clique ao primeiro contato com o seu negócio.",
     chips: ["Landing Pages", "Websites", "Interfaces Web", "Identidade Digital"],
+    telemetry: { label: "Performance LCP", value: "98/100", metric: "< 0.8s" },
     mockup: <MockupLanding />,
     reverse: false,
   },
@@ -279,6 +281,7 @@ const SERVICES = [
     ),
     description: "Dashboards, CRMs e plataformas sob medida que substituem planilhas e mensagens dispersas por um painel único e em tempo real.",
     chips: ["Dashboards", "SaaS", "CRM", "Automações", "Integrações"],
+    telemetry: { label: "Arquitetura", value: "Micro-frontends", metric: "Multi-tenant" },
     mockup: <MockupDashboard />,
     reverse: true,
   },
@@ -295,6 +298,7 @@ const SERVICES = [
     ),
     description: "Bots, servidores de jogos, automações e integrações avançadas — projetos fora do comum que exigem conhecimento técnico real.",
     chips: ["Bots Discord", "Servidores Minecraft", "Automações", "Integrações"],
+    telemetry: { label: "Protocolos", value: "WebSockets & gRPC", metric: "Baixa latência" },
     mockup: <MockupSpecialized />,
     reverse: false,
   },
@@ -311,6 +315,7 @@ const SERVICES = [
     ),
     description: "Configuramos e gerenciamos a infraestrutura do seu projeto — servidores Linux, pipelines CI/CD e ambientes de alta disponibilidade.",
     chips: ["Linux", "Deploy", "CI/CD", "Alta Disponibilidade"],
+    telemetry: { label: "Disponibilidade", value: "Zero Downtime", metric: "Rollback < 5s" },
     mockup: <MockupInfra />,
     reverse: true,
   },
@@ -478,11 +483,24 @@ export default function Services() {
       {SERVICES.map((s) => (
         <div key={s.num} className={`svc-panel${s.reverse ? " svc-panel--reverse" : ""}`}>
           <div className="svc-panel-inner services-container">
-            <div className="svc-mockup-col">{s.mockup}</div>
+            <div className="svc-mockup-col">
+              <TiltCard maxTilt={6} scale={1.01} spotlight={true}>
+                {s.mockup}
+              </TiltCard>
+            </div>
             <div className="svc-text-col">
               <span className="svc-tag">{s.tag}</span>
               <h3 className="svc-title">{s.title}</h3>
               <p className="svc-desc">{s.description}</p>
+              
+              {/* Telemetria de Engenharia */}
+              <div className="svc-telemetry-badge">
+                <span className="svc-telemetry-dot" />
+                <span className="svc-telemetry-label">{s.telemetry.label}:</span>
+                <span className="svc-telemetry-val">{s.telemetry.value}</span>
+                <span className="svc-telemetry-metric">({s.telemetry.metric})</span>
+              </div>
+
               <div className="svc-chips">
                 {s.chips.map((c) => (
                   <span key={c} className="svc-chip">{c}</span>

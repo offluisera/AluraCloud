@@ -91,16 +91,18 @@ export default function Nav() {
         className={`nav-dock ${scrolled ? "nav-dock--scrolled" : ""}`}
         aria-label="Navegação principal"
       >
-        {/* Logo */}
+        {/* Logo interativo: revela 'lura' dentro da bolinha ao passar o mouse */}
         <button
           className="nav-logo"
           onClick={() => handleNav("#inicio")}
-          aria-label="Ir para o início"
+          aria-label="Alura Cloud — Ir para o início"
         >
           <span className="nav-logo-icon">
-            <Logo size={22} />
+            <Logo size={20} />
           </span>
-          <span className="nav-logo-text">AC</span>
+          <span className="nav-logo-brand" aria-hidden="true">
+            <span className="nav-logo-word">lura</span>
+          </span>
         </button>
 
         {/* Separator */}

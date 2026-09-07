@@ -1,6 +1,8 @@
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import GSAPAnimations from "@/components/GSAPAnimations";
+import BlueprintGrid from "@/components/global-env/BlueprintGrid";
+import MouseSpotlight from "@/components/ui/MouseSpotlight";
 import Hero from "@/sections/Hero";
 import Services from "@/sections/Services";
 import Segments from "@/sections/Segments";
@@ -9,22 +11,26 @@ import Contact from "@/sections/Contact";
 
 /**
  * Alura Cloud — V2 Page Structure
+ * High-precision engineering & product design
  *
- * 01  HERO            → Headline + shapes + CTA
- * 02  SERVIÇOS        → Visual concept 5 columns
- * 03  SEGMENTOS       → Expertise comprovada (prova por segmento)
- * 04  PORTFÓLIO       → Horizontal gallery with Plasma bg
- * 05  CTA / CONTATO   → "TEM UMA IDEIA? VAMOS CONSTRUIR."
- * 06  FOOTER          → Marca + links + status
+ * 01  ATMOSPHERE      → BlueprintGrid + MouseSpotlight
+ * 02  HERO            → 2-Column Asymmetric layout + CloudConsoleHero
+ * 03  SERVIÇOS        → 3D Tilt Mockups + Telemetria de engenharia
+ * 04  SEGMENTOS       → 3D Parallax Tilt Cards + Badges por vertical
+ * 05  PORTFÓLIO       → Horizontal gallery with Plasma bg
+ * 06  CTA / CONTATO   → Wireframe 3D Geometric "A" + Glow
+ * 07  FOOTER          → Marca + links + status
  */
 export default function Home() {
   return (
     <>
+      <BlueprintGrid />
+      <MouseSpotlight />
       <Nav />
       <GSAPAnimations />
-      <main>
+      <main style={{ position: "relative", zIndex: 2 }}>
         <Hero />
-        <div style={{ backgroundColor: "var(--bg-deep)", position: "relative", zIndex: 1 }}>
+        <div style={{ position: "relative", zIndex: 1 }}>
           <Services />
           <Segments />
           <Portfolio />

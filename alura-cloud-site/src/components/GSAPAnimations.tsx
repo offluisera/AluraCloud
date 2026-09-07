@@ -75,7 +75,7 @@ export default function GSAPAnimations() {
 
       // --- Section headings ---
       document.querySelectorAll("section h2").forEach((el) => {
-        if (el.closest("#inicio")) return; // Custom animations
+        if (el.closest("#inicio") || el.closest("#contato")) return; // Custom animations
         gsap.fromTo(
           el,
           { opacity: 0, y: 40 },
@@ -93,25 +93,6 @@ export default function GSAPAnimations() {
         );
       });
 
-      // --- Contact headline dramatic ---
-      const contactH = document.querySelector("#contato h2");
-      if (contactH) {
-        gsap.fromTo(
-          contactH,
-          { opacity: 0, y: 60, scale: 0.97 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1,
-            ease: "power4.out",
-            scrollTrigger: {
-              trigger: contactH,
-              start: "top 80%",
-            },
-          }
-        );
-      }
     };
 
     init().catch(console.error);
