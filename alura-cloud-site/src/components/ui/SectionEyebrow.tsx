@@ -1,19 +1,19 @@
 /**
- * SectionEyebrow — numbered label used at the top of every section.
- * "01 — Hero", "02 — Manifesto", etc. Mirrors the technical/blueprint
- * numbering language used throughout the brand (coordinates, HUD data,
- * spec sheets), applied consistently to the real order of the page
- * instead of being copy-pasted from the design brief annotations.
+ * SectionEyebrow — small uppercase label used at the top of every section.
+ * Sem numeração: um marcador discreto na cor de destaque em vez do
+ * "01 —", "02 —" etc. (a numeração sequencial quebrava a sensação
+ * premium do site e não escalava bem quando seções eram adicionadas
+ * ou removidas).
  */
 interface SectionEyebrowProps {
-  index: number;
+  /** Mantido por compatibilidade com chamadas antigas; não é mais renderizado. */
+  index?: number;
   label: string;
   align?: "left" | "center";
   className?: string;
 }
 
 export default function SectionEyebrow({
-  index,
   label,
   align = "left",
   className = "",
@@ -22,7 +22,7 @@ export default function SectionEyebrow({
     <div
       className={`section-eyebrow ${align === "center" ? "section-eyebrow--center" : ""} ${className}`}
     >
-      <span className="section-eyebrow-index">{String(index).padStart(2, "0")}</span>
+      <span className="section-eyebrow-mark" aria-hidden="true" />
       <span className="label section-eyebrow-label">{label}</span>
     </div>
   );

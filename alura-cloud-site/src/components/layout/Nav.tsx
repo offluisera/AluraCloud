@@ -5,8 +5,7 @@ import Logo from "@/components/ui/Logo";
 const NAV_ITEMS = [
   { label: "Início", href: "#inicio" },
   { label: "Serviços", href: "#servicos" },
-  { label: "Processo", href: "#processo" },
-  { label: "Tecnologias", href: "#tecnologias" },
+  { label: "Segmentos", href: "#segmentos" },
   { label: "Contato", href: "#contato" },
 ];
 

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { createTimeline, stagger, onScroll, createScope, splitText, type Scope } from "animejs";
-import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /* ── SVG Mockups ─────────────────────────────────────────── */
 
@@ -308,53 +307,6 @@ export default function Services() {
 
     try {
       scope = createScope({ root }).add(() => {
-        /* ---- Intro (eyebrow, título, subtexto, visual de rede) ---- */
-        const introTrigger = root.querySelector<HTMLElement>(".services-intro-grid");
-        if (introTrigger) {
-          const eyebrow = root.querySelector<HTMLElement>(".services-eyebrow");
-          const lines = Array.from(root.querySelectorAll<HTMLElement>(".services-headline-line"));
-          const subtext = root.querySelector<HTMLElement>(".services-subtext");
-          const visual = root.querySelector<HTMLElement>(".services-intro-visual");
-          [eyebrow, ...lines, subtext, visual].forEach((el) => el && touched.push(el));
-
-          const introTl = createTimeline({
-            autoplay: onScroll({ target: introTrigger, enter: "bottom top" }),
-          });
-          if (eyebrow) {
-            introTl.add(eyebrow, {
-              opacity: [0, 1],
-              translateX: [-16, 0],
-              duration: 500,
-              easing: "easeOutQuad",
-            }, 0);
-          }
-          if (lines.length) {
-            introTl.add(lines, {
-              opacity: [0, 1],
-              translateY: [32, 0],
-              duration: 700,
-              delay: stagger(90),
-              easing: "easeOutExpo",
-            }, 120);
-          }
-          if (subtext) {
-            introTl.add(subtext, {
-              opacity: [0, 1],
-              translateY: [16, 0],
-              duration: 600,
-              easing: "easeOutQuad",
-            }, 420);
-          }
-          if (visual) {
-            introTl.add(visual, {
-              opacity: [0, 1],
-              scale: [0.86, 1],
-              duration: 1000,
-              easing: "easeOutElastic(1, .7)",
-            }, 200);
-          }
-        }
-
         /* ---- Cada painel de serviço ---- */
         root.querySelectorAll<HTMLElement>(".svc-panel-inner").forEach((panel) => {
           const isReverse = !!panel.closest(".svc-panel--reverse");
@@ -493,73 +445,6 @@ export default function Services() {
           <animateMotion dur="11s" repeatCount="indefinite" begin="2s"><mpath href="#sp5"/></animateMotion>
         </circle>
       </svg>
-
-      {/* Intro — 2 col: copy left, node SVG right */}
-      <div className="services-container">
-        <div className="services-intro-grid">
-          <div className="services-intro">
-            <SectionEyebrow index={3} label="Serviços" className="services-eyebrow" />
-            <h2 className="services-headline">
-              <span className="services-headline-line">SOLUÇÕES DIGITAIS</span>
-              <span className="services-headline-line">COMPLETAS PARA</span>
-              <span className="services-headline-line text-accent">PROJETOS REAIS.</span>
-            </h2>
-            <p className="services-subtext">
-              Da criação à infraestrutura, entregamos tudo o que seu projeto precisa para existir, crescer e evoluir.
-            </p>
-          </div>
-
-          {/* Decorative network SVG */}
-          <div className="services-intro-visual" aria-hidden>
-            <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-network-svg">
-              <defs>
-                <filter id="ng" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
-                <radialGradient id="ngrd" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#00df81" stopOpacity="0.18"/>
-                  <stop offset="100%" stopColor="#00df81" stopOpacity="0"/>
-                </radialGradient>
-              </defs>
-              <ellipse cx="210" cy="160" rx="180" ry="140" fill="url(#ngrd)"/>
-              {/* Sem grade interna própria: a grade da seção já dá essa
-                  textura por trás — duas grades sobrepostas competiam
-                  visualmente e deixavam o conjunto poluído. */}
-              {[
-                [60,60,210,120],[60,60,160,200],[210,120,370,80],[210,120,300,220],
-                [160,200,300,220],[160,200,80,270],[300,220,380,280],[80,270,200,290],
-                [370,80,380,160],[380,160,380,280]
-              ].map(([x1,y1,x2,y2],i) => (
-                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(0,223,129,0.2)" strokeWidth="1" strokeDasharray="4,6"/>
-              ))}
-              {/* Raios normalizados em 3 níveis (hub / nó / acento) em vez
-                  de 5 valores quase aleatórios — dá ritmo ao conjunto. */}
-              {[
-                {cx:60, cy:60, r:6, p:"4s"},
-                {cx:210,cy:120,r:9, p:"3s"},
-                {cx:370,cy:80, r:4, p:"5s"},
-                {cx:160,cy:200,r:6, p:"6s"},
-                {cx:300,cy:220,r:6, p:"4.5s"},
-                {cx:380,cy:160,r:4, p:"7s"},
-                {cx:80, cy:270,r:4, p:"5.5s"},
-                {cx:200,cy:290,r:4, p:"3.5s"},
-                {cx:380,cy:280,r:6, p:"4s"},
-              ].map((n,i) => (
-                <g key={i}>
-                  <circle cx={n.cx} cy={n.cy} r={n.r+6} fill="#00df81" opacity="0" filter="url(#ng)">
-                    <animate attributeName="opacity" values="0;0.25;0" dur={n.p} repeatCount="indefinite" begin={`${i*0.7}s`}/>
-                    <animate attributeName="r" values={`${n.r+4};${n.r+10};${n.r+4}`} dur={n.p} repeatCount="indefinite" begin={`${i*0.7}s`}/>
-                  </circle>
-                  <circle cx={n.cx} cy={n.cy} r={n.r} fill="#00df81" filter="url(#ng)" opacity="0.8"/>
-                  <circle cx={n.cx} cy={n.cy} r={n.r*0.45} fill="#ffffff" opacity="0.9"/>
-                </g>
-              ))}
-              <path id="npath" d="M60,60 C130,90 180,100 210,120 C250,145 320,150 370,80" fill="none"/>
-              <circle r="3.5" fill="#ffffff" opacity="0.9" filter="url(#ng)">
-                <animateMotion dur="4s" repeatCount="indefinite" begin="0s"><mpath href="#npath"/></animateMotion>
-              </circle>
-            </svg>
-          </div>
-        </div>
-      </div>
 
       {/* Full-screen panels — one per service */}
       {SERVICES.map((s) => (

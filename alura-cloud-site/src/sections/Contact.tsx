@@ -15,7 +15,7 @@ export default function Contact() {
         <div className="contact-inner">
           {/* Label */}
           <SectionEyebrow
-            index={7}
+            index={6}
             label="Contato"
             align="center"
             className="reveal"

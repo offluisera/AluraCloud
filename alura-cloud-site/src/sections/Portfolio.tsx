@@ -83,6 +83,20 @@ export default function Portfolio() {
     return () => mq.removeEventListener("change", handleChange);
   }, []);
 
+  // Ponte com a seção de Segmentos: ao clicar num card lá, seleciona
+  // aqui a categoria correspondente (o scroll até a seção é feito
+  // pelo próprio disparador do evento).
+  useEffect(() => {
+    const handleSelect = (e: Event) => {
+      const category = (e as CustomEvent<string>).detail;
+      if (PORTFOLIO_CATEGORIES.includes(category)) {
+        setActiveCategory(category);
+      }
+    };
+    window.addEventListener("alura:select-portfolio-category", handleSelect);
+    return () => window.removeEventListener("alura:select-portfolio-category", handleSelect);
+  }, []);
+
   // Filtra pela categoria ativa; se a categoria escolhida ainda não tem
   // projetos publicados, mostramos um aviso em vez de uma galeria vazia.
   const projects = PORTFOLIO_PROJECTS.filter((p) => p.category === activeCategory);
@@ -121,7 +135,7 @@ export default function Portfolio() {
         {/* Top Header & Filters */}
         <div className="container mx-auto px-4 md:px-8 flex flex-col items-center text-center gap-8">
           <div className="flex flex-col items-center gap-6 max-w-3xl">
-            <SectionEyebrow index={6} label="PORTFÓLIO ALURA CLOUD" className="reveal" />
+            <SectionEyebrow index={5} label="PORTFÓLIO ALURA CLOUD" className="reveal" />
             <h2 className="font-display font-medium text-white leading-[1.05] tracking-tight text-[clamp(2rem,5.5vw,3.75rem)]">
               Páginas que fazem a marca ser lembrada.
             </h2>
