@@ -253,7 +253,14 @@ const SERVICES = [
   {
     num: "01",
     tag: "Presença Digital",
-    title: "Sites que fazem o visitante virar contato.",
+    title: (
+      <>
+        Sites que fazem o{" "}
+        <span className="svc-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+          visitante virar contato.
+        </span>
+      </>
+    ),
     description: "Criamos landing pages e sites institucionais focados em conversão — do primeiro clique ao primeiro contato com o seu negócio.",
     chips: ["Landing Pages", "Websites", "Interfaces Web", "Identidade Digital"],
     mockup: <MockupLanding />,
@@ -262,7 +269,14 @@ const SERVICES = [
   {
     num: "02",
     tag: "Operação Inteligente",
-    title: "Sistemas que organizam o que hoje roda solto.",
+    title: (
+      <>
+        Sistemas que organizam{" "}
+        <span className="svc-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+          o que hoje roda solto.
+        </span>
+      </>
+    ),
     description: "Dashboards, CRMs e plataformas sob medida que substituem planilhas e mensagens dispersas por um painel único e em tempo real.",
     chips: ["Dashboards", "SaaS", "CRM", "Automações", "Integrações"],
     mockup: <MockupDashboard />,
@@ -271,7 +285,14 @@ const SERVICES = [
   {
     num: "03",
     tag: "Tecnologia Especializada",
-    title: "Soluções para o que ninguém mais resolve.",
+    title: (
+      <>
+        Soluções para o que{" "}
+        <span className="svc-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+          ninguém mais resolve.
+        </span>
+      </>
+    ),
     description: "Bots, servidores de jogos, automações e integrações avançadas — projetos fora do comum que exigem conhecimento técnico real.",
     chips: ["Bots Discord", "Servidores Minecraft", "Automações", "Integrações"],
     mockup: <MockupSpecialized />,
@@ -280,7 +301,14 @@ const SERVICES = [
   {
     num: "04",
     tag: "Infraestrutura",
-    title: "Deploy confiável, ambiente robusto.",
+    title: (
+      <>
+        Deploy confiável,{" "}
+        <span className="svc-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+          ambiente robusto.
+        </span>
+      </>
+    ),
     description: "Configuramos e gerenciamos a infraestrutura do seu projeto — servidores Linux, pipelines CI/CD e ambientes de alta disponibilidade.",
     chips: ["Linux", "Deploy", "CI/CD", "Alta Disponibilidade"],
     mockup: <MockupInfra />,
@@ -470,7 +498,11 @@ export default function Services() {
       <div className="svc-panel svc-panel--standby">
         <div className="svc-panel-inner services-container svc-panel-inner--center">
           <span className="svc-tag">Hospedagem</span>
-          <h3 className="svc-title">Nossa própria infraestrutura. Em breve.</h3>
+          <h3 className="svc-title">
+            <span className="svc-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+              Nossa própria infraestrutura. Em breve.
+            </span>
+          </h3>
           <p className="svc-desc">Estamos construindo uma plataforma de hospedagem proprietária para entregar mais performance, controle e custo-benefício.</p>
           <span className="svc-chip svc-chip--soon">Em Breve</span>
         </div>

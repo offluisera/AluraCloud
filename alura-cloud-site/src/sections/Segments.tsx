@@ -94,7 +94,9 @@ export default function Segments() {
             <h2 className="seg-title reveal">
               Resultados reais
               <br />
-              <span className="seg-title-muted">nesses segmentos</span>
+              <span className="seg-title-accent" style={{ color: "var(--color-caribbean-green, #00df81)" }}>
+                nesses segmentos
+              </span>
             </h2>
           </div>
 

@@ -87,7 +87,7 @@ export default function Hero() {
             <Button
               label="Explore um pouco"
               onClick={() => {
-                const next = document.querySelector("#manifesto");
+                const next = document.querySelector("#servicos");
                 if (next) next.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
             />
@@ -123,7 +123,7 @@ export default function Hero() {
       <button
         className="hero-scroll"
         onClick={() => {
-          const next = document.querySelector("#manifesto");
+          const next = document.querySelector("#servicos");
           if (next) next.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
         aria-label="Rolar para baixo"

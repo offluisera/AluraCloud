@@ -75,7 +75,7 @@ export default function GSAPAnimations() {
 
       // --- Section headings ---
       document.querySelectorAll("section h2").forEach((el) => {
-        if (el.closest("#inicio") || el.closest("#manifesto")) return; // Custom animations
+        if (el.closest("#inicio")) return; // Custom animations
         gsap.fromTo(
           el,
           { opacity: 0, y: 40 },
