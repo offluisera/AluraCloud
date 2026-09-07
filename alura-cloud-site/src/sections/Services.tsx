@@ -1,4 +1,6 @@
 "use client";
+import { useEffect, useRef } from "react";
+import { createTimeline, stagger, onScroll, createScope, splitText, type Scope } from "animejs";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 /* ── SVG Mockups ─────────────────────────────────────────── */
@@ -289,45 +291,205 @@ const SERVICES = [
 
 /* ── Component ───────────────────────────────────────────── */
 export default function Services() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return; // conteúdo já nasce visível via HTML/CSS normal — nada a fazer.
+
+    // Tudo que a animação for esconder e revelar é registrado aqui.
+    // Se qualquer coisa der errado no meio do caminho, o catch força
+    // opacity:1 em tudo — nunca fica conteúdo preso invisível.
+    const touched: HTMLElement[] = [];
+    let scope: Scope | null = null;
+
+    try {
+      scope = createScope({ root }).add(() => {
+        /* ---- Intro (eyebrow, título, subtexto, visual de rede) ---- */
+        const introTrigger = root.querySelector<HTMLElement>(".services-intro-grid");
+        if (introTrigger) {
+          const eyebrow = root.querySelector<HTMLElement>(".services-eyebrow");
+          const lines = Array.from(root.querySelectorAll<HTMLElement>(".services-headline-line"));
+          const subtext = root.querySelector<HTMLElement>(".services-subtext");
+          const visual = root.querySelector<HTMLElement>(".services-intro-visual");
+          [eyebrow, ...lines, subtext, visual].forEach((el) => el && touched.push(el));
+
+          const introTl = createTimeline({
+            autoplay: onScroll({ target: introTrigger, enter: "bottom top" }),
+          });
+          if (eyebrow) {
+            introTl.add(eyebrow, {
+              opacity: [0, 1],
+              translateX: [-16, 0],
+              duration: 500,
+              easing: "easeOutQuad",
+            }, 0);
+          }
+          if (lines.length) {
+            introTl.add(lines, {
+              opacity: [0, 1],
+              translateY: [32, 0],
+              duration: 700,
+              delay: stagger(90),
+              easing: "easeOutExpo",
+            }, 120);
+          }
+          if (subtext) {
+            introTl.add(subtext, {
+              opacity: [0, 1],
+              translateY: [16, 0],
+              duration: 600,
+              easing: "easeOutQuad",
+            }, 420);
+          }
+          if (visual) {
+            introTl.add(visual, {
+              opacity: [0, 1],
+              scale: [0.86, 1],
+              duration: 1000,
+              easing: "easeOutElastic(1, .7)",
+            }, 200);
+          }
+        }
+
+        /* ---- Cada painel de serviço ---- */
+        root.querySelectorAll<HTMLElement>(".svc-panel-inner").forEach((panel) => {
+          const isReverse = !!panel.closest(".svc-panel--reverse");
+          const mockup = panel.querySelector<HTMLElement>(".svc-mockup-col");
+          const tag = panel.querySelector<HTMLElement>(".svc-tag");
+          const title = panel.querySelector<HTMLElement>(".svc-title");
+          const desc = panel.querySelector<HTMLElement>(".svc-desc");
+          const chips = panel.querySelectorAll<HTMLElement>(".svc-chip");
+          [mockup, tag, desc, ...Array.from(chips)].forEach((el) => el && touched.push(el));
+
+          const panelTl = createTimeline({
+            autoplay: onScroll({ target: panel, enter: "bottom top" }),
+          });
+
+          if (mockup) {
+            panelTl.add(mockup, {
+              opacity: [0, 1],
+              translateX: [isReverse ? 50 : -50, 0],
+              scale: [0.95, 1],
+              duration: 900,
+              easing: "easeOutExpo",
+            }, 0);
+          }
+          if (tag) {
+            panelTl.add(tag, {
+              opacity: [0, 1],
+              scale: [0.85, 1],
+              duration: 450,
+              easing: "easeOutQuad",
+            }, 0);
+          }
+          if (title) {
+            const split = splitText(title, { words: true });
+            touched.push(...split.words);
+            panelTl.add(split.words, {
+              opacity: [0, 1],
+              translateY: [26, 0],
+              duration: 600,
+              delay: stagger(35),
+              easing: "easeOutExpo",
+            }, 120);
+          }
+          if (desc) {
+            panelTl.add(desc, {
+              opacity: [0, 1],
+              translateY: [14, 0],
+              duration: 550,
+              easing: "easeOutQuad",
+            }, 320);
+          }
+          if (chips.length) {
+            panelTl.add(chips, {
+              opacity: [0, 1],
+              translateY: [10, 0],
+              scale: [0.9, 1],
+              duration: 500,
+              delay: stagger(55),
+              easing: "easeOutBack",
+            }, 420);
+          }
+        });
+
+        /* ---- Painel "em breve" (hospedagem) ---- */
+        const standby = root.querySelector<HTMLElement>(".svc-panel--standby .svc-panel-inner");
+        if (standby) {
+          const tag = standby.querySelector<HTMLElement>(".svc-tag");
+          const title = standby.querySelector<HTMLElement>(".svc-title");
+          const desc = standby.querySelector<HTMLElement>(".svc-desc");
+          [tag, title, desc].forEach((el) => el && touched.push(el));
+
+          const standbyTl = createTimeline({
+            autoplay: onScroll({ target: standby, enter: "bottom top" }),
+          });
+          [tag, title, desc].forEach((el, i) => {
+            if (!el) return;
+            standbyTl.add(el, {
+              opacity: [0, 1],
+              translateY: [18, 0],
+              duration: 600,
+              easing: "easeOutQuad",
+            }, i * 120);
+          });
+        }
+      });
+    } catch (err) {
+      // Rede de segurança: nunca deixar conteúdo travado invisível.
+      touched.forEach((el) => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+      console.error("[Services] animação falhou, conteúdo forçado a visível:", err);
+    }
+
+    return () => scope?.revert();
+  }, []);
+
   return (
-    <section className="services-section" id="servicos">
+    <section className="services-section" id="servicos" ref={rootRef}>
 
       {/* SVG diagonal circuit lines layer */}
       <svg className="svc-bg-svg" aria-hidden viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="svc-glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
+          <filter id="svc-glow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
             <feComposite in="SourceGraphic" in2="blur" operator="over"/>
           </filter>
         </defs>
 
         {/* Path 1 — top-left diagonal sweep */}
         <path id="sp1" d="M-40,80 C200,90 400,200 720,220 C1040,240 1280,160 1480,180" fill="none" stroke="rgba(0,223,129,0.15)" strokeWidth="1" strokeDasharray="6,10"/>
-        <circle r="5" fill="#00df81" filter="url(#svc-glow)" opacity="0.9">
+        <circle r="3.5" fill="#00df81" filter="url(#svc-glow)" opacity="0.4">
           <animateMotion dur="9s" repeatCount="indefinite" begin="0s"><mpath href="#sp1"/></animateMotion>
         </circle>
 
         {/* Path 2 — mid descending */}
         <path id="sp2" d="M1480,280 C1200,320 900,380 600,360 C300,340 100,420 -40,460" fill="none" stroke="rgba(0,223,129,0.12)" strokeWidth="1" strokeDasharray="4,14"/>
-        <circle r="4" fill="#00df81" filter="url(#svc-glow)" opacity="0.8">
+        <circle r="3" fill="#00df81" filter="url(#svc-glow)" opacity="0.35">
           <animateMotion dur="12s" repeatCount="indefinite" begin="1.5s"><mpath href="#sp2"/></animateMotion>
         </circle>
 
         {/* Path 3 — steep diagonal top-right */}
         <path id="sp3" d="M-40,340 C300,300 600,450 900,420 C1100,400 1300,320 1480,350" fill="none" stroke="rgba(0,223,129,0.1)" strokeWidth="1" strokeDasharray="8,12"/>
-        <circle r="4.5" fill="#00df81" filter="url(#svc-glow)" opacity="0.85">
+        <circle r="3.2" fill="#00df81" filter="url(#svc-glow)" opacity="0.38">
           <animateMotion dur="10s" repeatCount="indefinite" begin="3s"><mpath href="#sp3"/></animateMotion>
         </circle>
 
         {/* Path 4 — lower wide arc */}
         <path id="sp4" d="M1480,540 C1100,500 800,600 500,580 C200,560 0,640 -40,660" fill="none" stroke="rgba(0,223,129,0.13)" strokeWidth="1" strokeDasharray="5,10"/>
-        <circle r="4" fill="#00df81" filter="url(#svc-glow)" opacity="0.7">
+        <circle r="3" fill="#00df81" filter="url(#svc-glow)" opacity="0.32">
           <animateMotion dur="14s" repeatCount="indefinite" begin="5s"><mpath href="#sp4"/></animateMotion>
         </circle>
 
         {/* Path 5 — bottom gentle rise */}
         <path id="sp5" d="M-40,760 C300,720 700,800 1100,760 C1280,745 1400,780 1480,770" fill="none" stroke="rgba(0,223,129,0.1)" strokeWidth="1" strokeDasharray="3,12"/>
-        <circle r="3.5" fill="#00df81" filter="url(#svc-glow)" opacity="0.75">
+        <circle r="2.8" fill="#00df81" filter="url(#svc-glow)" opacity="0.34">
           <animateMotion dur="11s" repeatCount="indefinite" begin="2s"><mpath href="#sp5"/></animateMotion>
         </circle>
       </svg>
@@ -338,9 +500,9 @@ export default function Services() {
           <div className="services-intro">
             <SectionEyebrow index={3} label="Serviços" className="services-eyebrow" />
             <h2 className="services-headline">
-              SOLUÇÕES DIGITAIS<br />
-              COMPLETAS PARA<br />
-              <span className="text-accent">PROJETOS REAIS.</span>
+              <span className="services-headline-line">SOLUÇÕES DIGITAIS</span>
+              <span className="services-headline-line">COMPLETAS PARA</span>
+              <span className="services-headline-line text-accent">PROJETOS REAIS.</span>
             </h2>
             <p className="services-subtext">
               Da criação à infraestrutura, entregamos tudo o que seu projeto precisa para existir, crescer e evoluir.
@@ -351,19 +513,16 @@ export default function Services() {
           <div className="services-intro-visual" aria-hidden>
             <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="svc-network-svg">
               <defs>
-                <filter id="ng"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+                <filter id="ng" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
                 <radialGradient id="ngrd" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stopColor="#00df81" stopOpacity="0.18"/>
                   <stop offset="100%" stopColor="#00df81" stopOpacity="0"/>
                 </radialGradient>
               </defs>
               <ellipse cx="210" cy="160" rx="180" ry="140" fill="url(#ngrd)"/>
-              {[40,80,120,160,200,240,280,320,360,400].map(x => (
-                <line key={x} x1={x} y1="0" x2={x} y2="320" stroke="rgba(0,223,129,0.04)" strokeWidth="1"/>
-              ))}
-              {[40,80,120,160,200,240,280].map(y => (
-                <line key={y} x1="0" y1={y} x2="420" y2={y} stroke="rgba(0,223,129,0.04)" strokeWidth="1"/>
-              ))}
+              {/* Sem grade interna própria: a grade da seção já dá essa
+                  textura por trás — duas grades sobrepostas competiam
+                  visualmente e deixavam o conjunto poluído. */}
               {[
                 [60,60,210,120],[60,60,160,200],[210,120,370,80],[210,120,300,220],
                 [160,200,300,220],[160,200,80,270],[300,220,380,280],[80,270,200,290],
@@ -371,14 +530,16 @@ export default function Services() {
               ].map(([x1,y1,x2,y2],i) => (
                 <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(0,223,129,0.2)" strokeWidth="1" strokeDasharray="4,6"/>
               ))}
+              {/* Raios normalizados em 3 níveis (hub / nó / acento) em vez
+                  de 5 valores quase aleatórios — dá ritmo ao conjunto. */}
               {[
                 {cx:60, cy:60, r:6, p:"4s"},
-                {cx:210,cy:120,r:10,p:"3s"},
-                {cx:370,cy:80, r:5, p:"5s"},
-                {cx:160,cy:200,r:7, p:"6s"},
+                {cx:210,cy:120,r:9, p:"3s"},
+                {cx:370,cy:80, r:4, p:"5s"},
+                {cx:160,cy:200,r:6, p:"6s"},
                 {cx:300,cy:220,r:6, p:"4.5s"},
                 {cx:380,cy:160,r:4, p:"7s"},
-                {cx:80, cy:270,r:5, p:"5.5s"},
+                {cx:80, cy:270,r:4, p:"5.5s"},
                 {cx:200,cy:290,r:4, p:"3.5s"},
                 {cx:380,cy:280,r:6, p:"4s"},
               ].map((n,i) => (

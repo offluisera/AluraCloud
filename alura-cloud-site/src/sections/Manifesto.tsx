@@ -13,7 +13,7 @@ export default function Manifesto() {
       {/* SVG diagonal circuit lines */}
       <svg className="manifesto-bg-svg" aria-hidden viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="mg"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+          <filter id="mg" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="3" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
         </defs>
         <path id="mp1" d="M-40,60 C300,50 600,150 900,130 C1150,115 1350,60 1480,80" fill="none" stroke="rgba(0,223,129,0.12)" strokeWidth="1" strokeDasharray="6,10"/>
         <circle r="4.5" fill="#00df81" filter="url(#mg)" opacity="0.9">

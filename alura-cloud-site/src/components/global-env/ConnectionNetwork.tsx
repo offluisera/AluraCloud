@@ -10,7 +10,7 @@ export default function ConnectionNetwork() {
       preserveAspectRatio="xMidYMid slice"
     >
       <defs>
-        <filter id="path-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <filter id="path-glow" x="-100%" y="-100%" width="300%" height="300%">
           <feGaussianBlur stdDeviation="4" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
