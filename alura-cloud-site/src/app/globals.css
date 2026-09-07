@@ -1299,10 +1299,15 @@ a {
 }
 
 /* ── Container ───────────────────────────────────────────── */
+/* Alinhado ao .container global (mesmo max-width/gutter) para que
+   os painéis de Serviços comecem exatamente na mesma margem que
+   Segmentos, Portfólio etc. — antes usava um valor próprio (6rem
+   de padding) que deixava o conteúdo visivelmente mais "recuado"
+   que o resto do site. */
 .services-container {
-  max-width: 1200px;
+  max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 var(--space-2xl);
+  padding: 0 var(--gutter);
   position: relative;
   z-index: 1;
 }

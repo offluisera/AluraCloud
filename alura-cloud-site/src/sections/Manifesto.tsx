@@ -1,5 +1,4 @@
 import React from "react";
-import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import CurvedLoop from "@/components/ui/CurvedLoop";
 
 /**
@@ -28,12 +27,6 @@ export default function Manifesto() {
           <animateMotion dur="10s" repeatCount="indefinite" begin="4s"><mpath href="#mp3"/></animateMotion>
         </circle>
       </svg>
-
-      <div className="container manifesto-inner">
-        <div className="manifesto-eyebrow-container">
-          <SectionEyebrow index={2} label="Nosso Propósito" className="reveal" />
-        </div>
-      </div>
 
       <CurvedLoop
         textPri="Você traz a ideia e nós construímos o "

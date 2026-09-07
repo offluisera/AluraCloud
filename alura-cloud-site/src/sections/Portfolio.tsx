@@ -133,7 +133,7 @@ export default function Portfolio() {
       <div className="relative z-10 w-full flex flex-col items-center gap-10 md:gap-14">
         
         {/* Top Header & Filters */}
-        <div className="container mx-auto px-4 md:px-8 flex flex-col items-center text-center gap-8">
+        <div className="container flex flex-col items-center text-center gap-8">
           <div className="flex flex-col items-center gap-6 max-w-3xl">
             <SectionEyebrow index={5} label="PORTFÓLIO ALURA CLOUD" className="reveal" />
             <h2 className="font-display font-medium text-white leading-[1.05] tracking-tight text-[clamp(2rem,5.5vw,3.75rem)]">
